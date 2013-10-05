@@ -76,14 +76,9 @@ static NSString *CellIdentifier = @"CellIdentifier";
     return cell;
 }
 
-
-// When – tableView:heightForRowAtIndexPath: && tableView:estimatedHeightForRowAtIndexPath: are commented out
-// cells will populate, but the cell heights will not be adjusted.
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
+   
     // Dequeue a cell for the particular layout required (you will likely need to substitute
     // the reuse identifier dynamically at runtime, instead of a static string as below).
     // Note that this method will init and return a new cell if there isn't one available in the reuse pool,
@@ -101,12 +96,10 @@ static NSString *CellIdentifier = @"CellIdentifier";
     [cell.contentView setNeedsLayout];
     [cell.contentView layoutIfNeeded];
     CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    NSLog(@"My returned height = %f", height);
-    */
     
+    NSLog(@"My returned height = %f", height);
 //    return height;
-   
-    return 88.0f;
+    return 200.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -115,7 +108,8 @@ static NSString *CellIdentifier = @"CellIdentifier";
     // estimated row height that's at least within an order of magnitude of the actual height.
     // For example:
     
-    return 150.0f;
+    NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    return 500.0f;
 
 }
 
