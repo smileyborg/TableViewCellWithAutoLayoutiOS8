@@ -19,6 +19,9 @@
 		99BCDCC018008C0000B8E66B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BCDCA818008C0000B8E66B /* UIKit.framework */; };
 		99BCDCC818008C0000B8E66B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 99BCDCC618008C0000B8E66B /* InfoPlist.strings */; };
 		99BCDCCA18008C0000B8E66B /* TableViewCellWithAutoLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCC918008C0000B8E66B /* TableViewCellWithAutoLayoutTests.m */; };
+		99BCDCDA18008C1700B8E66B /* RJModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCD518008C1700B8E66B /* RJModel.m */; };
+		99BCDCDB18008C1700B8E66B /* RJTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCD718008C1700B8E66B /* RJTableViewCell.m */; };
+		99BCDCDC18008C1700B8E66B /* RJTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCD918008C1700B8E66B /* RJTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,12 @@
 		99BCDCC518008C0000B8E66B /* TableViewCellWithAutoLayoutTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TableViewCellWithAutoLayoutTests-Info.plist"; sourceTree = "<group>"; };
 		99BCDCC718008C0000B8E66B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		99BCDCC918008C0000B8E66B /* TableViewCellWithAutoLayoutTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewCellWithAutoLayoutTests.m; sourceTree = "<group>"; };
+		99BCDCD418008C1700B8E66B /* RJModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJModel.h; sourceTree = "<group>"; };
+		99BCDCD518008C1700B8E66B /* RJModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJModel.m; sourceTree = "<group>"; };
+		99BCDCD618008C1700B8E66B /* RJTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJTableViewCell.h; sourceTree = "<group>"; };
+		99BCDCD718008C1700B8E66B /* RJTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJTableViewCell.m; sourceTree = "<group>"; };
+		99BCDCD818008C1700B8E66B /* RJTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJTableViewController.h; sourceTree = "<group>"; };
+		99BCDCD918008C1700B8E66B /* RJTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +119,7 @@
 				99BCDCB318008C0000B8E66B /* RJAppDelegate.h */,
 				99BCDCB418008C0000B8E66B /* RJAppDelegate.m */,
 				99BCDCB618008C0000B8E66B /* Images.xcassets */,
+				99BCDCD318008C1700B8E66B /* TableViewController */,
 				99BCDCAB18008C0000B8E66B /* Supporting Files */,
 			);
 			path = TableViewCellWithAutoLayout;
@@ -142,6 +152,19 @@
 				99BCDCC618008C0000B8E66B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		99BCDCD318008C1700B8E66B /* TableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				99BCDCD418008C1700B8E66B /* RJModel.h */,
+				99BCDCD518008C1700B8E66B /* RJModel.m */,
+				99BCDCD618008C1700B8E66B /* RJTableViewCell.h */,
+				99BCDCD718008C1700B8E66B /* RJTableViewCell.m */,
+				99BCDCD818008C1700B8E66B /* RJTableViewController.h */,
+				99BCDCD918008C1700B8E66B /* RJTableViewController.m */,
+			);
+			path = TableViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,7 +264,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				99BCDCB518008C0000B8E66B /* RJAppDelegate.m in Sources */,
+				99BCDCDC18008C1700B8E66B /* RJTableViewController.m in Sources */,
 				99BCDCB118008C0000B8E66B /* main.m in Sources */,
+				99BCDCDA18008C1700B8E66B /* RJModel.m in Sources */,
+				99BCDCDB18008C1700B8E66B /* RJTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

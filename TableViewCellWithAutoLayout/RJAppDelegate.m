@@ -7,6 +7,7 @@
 //
 
 #import "RJAppDelegate.h"
+#import "RJTableViewController.h"
 
 @implementation RJAppDelegate
 
@@ -14,7 +15,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    RJTableViewController *viewController = [[RJTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;
 }
