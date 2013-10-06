@@ -24,7 +24,8 @@ static NSString *CellIdentifier = @"CellIdentifier";
     if (self) {
         // Custom initialization
         self.title = @"Table View Controller";
-        self.model = [[RJModel alloc] init]; [self.model populateDataSource];
+        self.model = [[RJModel alloc] init];
+        [self.model populateDataSource];
     }
     return self;
 }
@@ -73,6 +74,13 @@ static NSString *CellIdentifier = @"CellIdentifier";
     cell.titleLabel.text =  [dataSourceItem valueForKey:@"title"];
     cell.bodyLabel.text = [dataSourceItem valueForKey:@"body"];
     
+    // The below line is VERY important for multi line labels, it tells the label when to wrap text to the next line.
+    // We have 20 pts inset on the left and right, for a total of 40 pts.
+    cell.bodyLabel.preferredMaxLayoutWidth = tableView.bounds.size.width - kLabelHorizontalInsets * 2.0f;
+    
+    // Make sure the constraints have been added to this cell, since it may have just been created from scratch
+    [cell setNeedsUpdateConstraints];
+    
     return cell;
 }
 
@@ -84,6 +92,9 @@ static NSString *CellIdentifier = @"CellIdentifier";
     // Note that this method will init and return a new cell if there isn't one available in the reuse pool,
     // so either way after this line of code you will have a cell with the correct constraints ready to go.
     
+    // Dequeueing a cell here works OK but you can also just hold one offscreen table view cell in a property
+    // and use it to do these height calculations. (If you have more than one cell identifier, make sure to
+    // hold a dictionary of offscreen cells, with a cell for each cell identifier in it.)
     RJTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell with content for the given indexPath, for example:
@@ -93,13 +104,20 @@ static NSString *CellIdentifier = @"CellIdentifier";
     cell.titleLabel.text =  [dataSourceItem valueForKey:@"title"];
     cell.bodyLabel.text = [dataSourceItem valueForKey:@"body"];
     
+    // The below line is VERY important for multi line labels, it tells the label when to wrap text to the next line.
+    // We have 20 pts inset on the left and right, for a total of 40 pts.
+    cell.bodyLabel.preferredMaxLayoutWidth = tableView.bounds.size.width - (kLabelHorizontalInsets * 2.0f);
+    
+    // Make sure the cell has constraints setup before asking it to layout
+    [cell setNeedsUpdateConstraints];
+    [cell updateConstraintsIfNeeded];
+    
     [cell.contentView setNeedsLayout];
     [cell.contentView layoutIfNeeded];
     CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     
     NSLog(@"My returned height = %f", height);
-//    return height;
-    return 200.0f;
+    return height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -108,7 +126,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
     // estimated row height that's at least within an order of magnitude of the actual height.
     // For example:
     
-    NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+//    NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
     return 500.0f;
 
 }
