@@ -31,7 +31,9 @@
         [self.titleLabel setFont: [UIFont fontWithName:@"Helvetica-Bold" size:21]];
         [self.titleLabel setTextColor:[UIColor blackColor]];
         [self.titleLabel setBackgroundColor:[UIColor clearColor]];
-        
+//        [self.titleLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
+//        [self.titleLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisVertical];
+
         self.bodyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         [self.bodyLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.bodyLabel setLineBreakMode:NSLineBreakByTruncatingTail];
@@ -130,7 +132,7 @@
                                       toItem:self.contentView
                                       attribute:NSLayoutAttributeLeading
                                       multiplier:1.0f
-                                      constant:(kLabelHorizontalInsets * 2)]];
+                                      constant:kLabelHorizontalInsets]];
     
     [self.contentView  addConstraint:[NSLayoutConstraint
                                       constraintWithItem:self.bodyLabel
