@@ -28,20 +28,22 @@
         [self.titleLabel setAdjustsFontSizeToFitWidth:YES];
         [self.titleLabel setNumberOfLines:1];
         [self.titleLabel setTextAlignment:NSTextAlignmentLeft];
-        [self.titleLabel setFont: [UIFont fontWithName:@"Helvetica-Bold" size:16]];
+        [self.titleLabel setFont: [UIFont fontWithName:@"Helvetica-Bold" size:21]];
         [self.titleLabel setTextColor:[UIColor blackColor]];
-        [self.titleLabel setBackgroundColor:[UIColor lightGrayColor]];
+        [self.titleLabel setBackgroundColor:[UIColor clearColor]];
         
         self.bodyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         [self.bodyLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.bodyLabel setLineBreakMode:NSLineBreakByTruncatingTail];
+        
         // You don't want the below line; let the font size for the multi-line body label remain fixed.
 //        [self.titleLabel setAdjustsFontSizeToFitWidth:YES];
+        
         [self.bodyLabel setNumberOfLines:0];
         [self.bodyLabel setTextAlignment:NSTextAlignmentLeft];
-        [self.bodyLabel setFont: [UIFont fontWithName:@"Helvetica" size:11]];
-        [self.bodyLabel setTextColor:[UIColor blackColor]];
-        [self.bodyLabel setBackgroundColor:[UIColor yellowColor]];
+        [self.bodyLabel setFont: [UIFont fontWithName:@"Helvetica" size:14]];
+        [self.bodyLabel setTextColor:[UIColor darkGrayColor]];
+        [self.bodyLabel setBackgroundColor:[UIColor clearColor]];
         
         // If you don't do this, the auto layout solver engine may calculate a ever-so-slightly smaller height than actually required
         // (probably due to rounding errors internally) which will cause the bodyLabel to truncate the last line. This will force
@@ -58,30 +60,16 @@
         [self.contentView addSubview:self.bodyLabel];
     }
     
-//    NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
-    
     return self;
-}
-
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-    [super willMoveToSuperview:newSuperview];
-    
-//    NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
-    
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-//    NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 }
 
 - (void)updateConstraints {
     [super updateConstraints];
     
-    if (self.hasSetupConstraints) {
-        return;
-    }
-    
+    // Modified to a single-line return. No biggie.
+    //
+    if (self.hasSetupConstraints) return;
+
     [self.contentView addConstraint:[NSLayoutConstraint
                                      constraintWithItem:self.titleLabel
                                      attribute:NSLayoutAttributeLeading
@@ -98,7 +86,7 @@
                                      toItem:self.contentView
                                      attribute:NSLayoutAttributeTop
                                      multiplier:1.0f
-                                     constant:20.0f]];
+                                     constant:(kLabelHorizontalInsets / 2)]];
     
     [self.contentView addConstraint:[NSLayoutConstraint
                                      constraintWithItem:self.titleLabel
@@ -119,6 +107,20 @@
 //                                      multiplier:1.0f
 //                                      constant:22.0f]];
     
+    // "You don't need the below constraint - the auto-generated content compression resistance constraints on UILabel are sufficient!"
+    //
+    // OK, this is weird. Without NSLayoutAttributeHeight-NSLayoutRelationGreaterThanOrEqual self.titleLabel collapses?
+    // Adding the NSLayoutAttributeHeight-NSLayoutRelationGreaterThanOrEqual resolves issue. Perhaps there is another way...
+    // ...
+    [self.contentView  addConstraint:[NSLayoutConstraint
+                                      constraintWithItem:self.titleLabel
+                                      attribute:NSLayoutAttributeHeight
+                                      relatedBy:NSLayoutRelationGreaterThanOrEqual
+                                      toItem:nil
+                                      attribute:NSLayoutAttributeNotAnAttribute
+                                      multiplier:1.0f
+                                      constant:22.0f]];
+    
     ///////////////////////////////////////////////////////////////////////////////////////////
     
     [self.contentView  addConstraint:[NSLayoutConstraint
@@ -128,7 +130,7 @@
                                       toItem:self.contentView
                                       attribute:NSLayoutAttributeLeading
                                       multiplier:1.0f
-                                      constant:kLabelHorizontalInsets]];
+                                      constant:(kLabelHorizontalInsets * 2)]];
     
     [self.contentView  addConstraint:[NSLayoutConstraint
                                       constraintWithItem:self.bodyLabel
@@ -137,7 +139,7 @@
                                       toItem:self.titleLabel
                                       attribute:NSLayoutAttributeBottom
                                       multiplier:1.0f
-                                      constant:0.0f]];
+                                      constant:(kLabelHorizontalInsets / 4)]];
     
     [self.contentView  addConstraint:[NSLayoutConstraint
                                       constraintWithItem:self.bodyLabel
@@ -155,7 +157,7 @@
                                       toItem:self.contentView
                                       attribute:NSLayoutAttributeBottom
                                       multiplier:1.0f
-                                      constant:-20.0f]];
+                                      constant:-(kLabelHorizontalInsets / 2)]];
     
     // You don't need the below constraint - the auto-generated content compression resistance constraints on UILabel are sufficient!
 //    [self.contentView  addConstraint:[NSLayoutConstraint
@@ -168,8 +170,6 @@
 //                                      constant:22.0f]];
     
     self.hasSetupConstraints = YES;
-    
-//    NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
     
 }
 
