@@ -24,7 +24,6 @@
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         [self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
-        [self.titleLabel setAdjustsFontSizeToFitWidth:YES];
         [self.titleLabel setNumberOfLines:1];
         [self.titleLabel setTextAlignment:NSTextAlignmentLeft];
         [self.titleLabel setFont: [UIFont fontWithName:@"Helvetica-Bold" size:21]];
