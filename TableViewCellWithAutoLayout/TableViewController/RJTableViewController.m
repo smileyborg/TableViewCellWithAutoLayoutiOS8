@@ -67,16 +67,13 @@ static NSString *CellIdentifier = @"CellIdentifier";
 {
     
     RJTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
- 
-    NSDictionary *dataSourceItem = [self.model.dataSource objectAtIndex:indexPath.row];
     
     // Configure the cell...
+    
+    NSDictionary *dataSourceItem = [self.model.dataSource objectAtIndex:indexPath.row];
+
     cell.titleLabel.text =  [dataSourceItem valueForKey:@"title"];
     cell.bodyLabel.text = [dataSourceItem valueForKey:@"body"];
-    
-    // Don't need to set the preferredMaxLayoutWidth here because the cell will now have a fixed width, which will cause
-    // the multi-line label to wrap correctly since it is pinned to the left & right edges of the cell's contentView.
-//    cell.bodyLabel.preferredMaxLayoutWidth = tableView.bounds.size.width - kLabelHorizontalInsets * 2.0f;
     
     // Make sure the constraints have been added to this cell, since it may have just been created from scratch
     [cell setNeedsUpdateConstraints];
@@ -100,6 +97,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
     // Configure the cell with content for the given indexPath, for example:
     // cell.textLabel.text = someTextForThisCell;
     // ...
+    
     NSDictionary *dataSourceItem = [self.model.dataSource objectAtIndex:indexPath.row];
     cell.titleLabel.text =  [dataSourceItem valueForKey:@"title"];
     cell.bodyLabel.text = [dataSourceItem valueForKey:@"body"];
@@ -116,7 +114,6 @@ static NSString *CellIdentifier = @"CellIdentifier";
     
     CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     
-    NSLog(@"My returned height = %f", height);
     return height;
 }
 
@@ -124,9 +121,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
 {
     // Return a fixed constant if possible, or do some minimal calculations if needed to be able to return an
     // estimated row height that's at least within an order of magnitude of the actual height.
-    // For example:
     
-//    NSLog(@"%@ %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
     return 500.0f;
 
 }
