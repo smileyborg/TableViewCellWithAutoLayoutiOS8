@@ -74,9 +74,9 @@ static NSString *CellIdentifier = @"CellIdentifier";
     cell.titleLabel.text =  [dataSourceItem valueForKey:@"title"];
     cell.bodyLabel.text = [dataSourceItem valueForKey:@"body"];
     
-    // The below line is VERY important for multi line labels, it tells the label when to wrap text to the next line.
-    // We have 20 pts inset on the left and right, for a total of 40 pts.
-    cell.bodyLabel.preferredMaxLayoutWidth = tableView.bounds.size.width - kLabelHorizontalInsets * 2.0f;
+    // Don't need to set the preferredMaxLayoutWidth here because the cell will now have a fixed width, which will cause
+    // the multi-line label to wrap correctly since it is pinned to the left & right edges of the cell's contentView.
+//    cell.bodyLabel.preferredMaxLayoutWidth = tableView.bounds.size.width - kLabelHorizontalInsets * 2.0f;
     
     // Make sure the constraints have been added to this cell, since it may have just been created from scratch
     [cell setNeedsUpdateConstraints];
