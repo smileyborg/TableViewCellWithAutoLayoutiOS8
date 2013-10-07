@@ -111,9 +111,9 @@ static NSString *CellIdentifier = @"CellIdentifier";
     // Make sure the cell has constraints setup before asking it to layout
     [cell setNeedsUpdateConstraints];
     [cell updateConstraintsIfNeeded];
-    
     [cell.contentView setNeedsLayout];
     [cell.contentView layoutIfNeeded];
+    
     CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     
     NSLog(@"My returned height = %f", height);

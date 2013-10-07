@@ -50,9 +50,9 @@
     int r = arc4random() % [lorumIpsumArray count];
     NSArray *lorumIpsumRandom = [lorumIpsumArray objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, r)]];
 
-    // Array to string. Adding <START> <END> tags to ensure all text visible.
+    // Array to string. Adding '!!!' to end of string to ensure all text is visible.
     //
-    return [NSString stringWithFormat:@"<START>%@<END>", [lorumIpsumRandom componentsJoinedByString:@" "]];
+    return [NSString stringWithFormat:@"%@!!!", [lorumIpsumRandom componentsJoinedByString:@" "]];
 
 }
 
