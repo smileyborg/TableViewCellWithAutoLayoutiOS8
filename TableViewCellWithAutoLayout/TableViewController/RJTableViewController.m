@@ -84,29 +84,14 @@ static NSString *CellIdentifier = @"CellIdentifier";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
    
-    // Dequeue a cell for the particular layout required (you will likely need to substitute
-    // the reuse identifier dynamically at runtime, instead of a static string as below).
-    // Note that this method will init and return a new cell if there isn't one available in the reuse pool,
-    // so either way after this line of code you will have a cell with the correct constraints ready to go.
-    
-    // Dequeueing a cell here works OK but you can also just hold one offscreen table view cell in a property
-    // and use it to do these height calculations. (If you have more than one cell identifier, make sure to
-    // hold a dictionary of offscreen cells, with a cell for each cell identifier in it.)
     RJTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // Configure the cell with content for the given indexPath, for example:
-    // cell.textLabel.text = someTextForThisCell;
-    // ...
     
     NSDictionary *dataSourceItem = [self.model.dataSource objectAtIndex:indexPath.row];
     cell.titleLabel.text =  [dataSourceItem valueForKey:@"title"];
     cell.bodyLabel.text = [dataSourceItem valueForKey:@"body"];
     
-    // The below line is VERY important for multi line labels, it tells the label when to wrap text to the next line.
-    // We have 20 pts inset on the left and right, for a total of 40 pts.
     cell.bodyLabel.preferredMaxLayoutWidth = tableView.bounds.size.width - (kLabelHorizontalInsets * 2.0f);
     
-    // Make sure the cell has constraints setup before asking it to layout
     [cell setNeedsUpdateConstraints];
     [cell updateConstraintsIfNeeded];
     [cell.contentView setNeedsLayout];
@@ -119,9 +104,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return a fixed constant if possible, or do some minimal calculations if needed to be able to return an
-    // estimated row height that's at least within an order of magnitude of the actual height.
-    
+
     return 500.0f;
 
 }
