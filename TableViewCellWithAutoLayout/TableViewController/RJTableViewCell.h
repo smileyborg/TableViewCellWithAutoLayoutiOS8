@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-// Need this value accessible in the view controller to set the correct preferredMaxLayoutWidth on the bodyLabel.
 #define kLabelHorizontalInsets  20.0f
 
 @interface RJTableViewCell : UITableViewCell
