@@ -51,20 +51,38 @@ static NSString *CellIdentifier = @"CellIdentifier";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.tableView registerClass:[RJTableViewCell class] forCellReuseIdentifier:CellIdentifier];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    [self.tableView registerClass:[RJTableViewCell class] forCellReuseIdentifier:CellIdentifier];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contentSizeCategoryChanged:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIContentSizeCategoryDidChangeNotification
+                                                  object:nil];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)contentSizeCategoryChanged:(NSNotification *)notification
+{
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -86,7 +104,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
     
     RJTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    [cell updateFonts];
     
     NSDictionary *dataSourceItem = [self.model.dataSource objectAtIndex:indexPath.row];
 
@@ -103,6 +121,8 @@ static NSString *CellIdentifier = @"CellIdentifier";
 {
    
     RJTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    [cell updateFonts];
     
     NSDictionary *dataSourceItem = [self.model.dataSource objectAtIndex:indexPath.row];
     cell.titleLabel.text =  [dataSourceItem valueForKey:@"title"];
@@ -122,9 +142,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     return 500.0f;
-
 }
 
 /*

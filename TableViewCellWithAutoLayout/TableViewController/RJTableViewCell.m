@@ -28,7 +28,7 @@
 
 @interface RJTableViewCell ()
 
-@property (nonatomic, assign) BOOL hasSetupConstraints;
+@property (nonatomic, assign) BOOL didSetupConstraints;
 
 @end
 
@@ -44,7 +44,6 @@
         [self.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         [self.titleLabel setNumberOfLines:1];
         [self.titleLabel setTextAlignment:NSTextAlignmentLeft];
-        [self.titleLabel setFont: [UIFont fontWithName:@"Helvetica-Bold" size:21]];
         [self.titleLabel setTextColor:[UIColor blackColor]];
         [self.titleLabel setBackgroundColor:[UIColor clearColor]];
         
@@ -54,12 +53,13 @@
         [self.bodyLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         [self.bodyLabel setNumberOfLines:0];
         [self.bodyLabel setTextAlignment:NSTextAlignmentLeft];
-        [self.bodyLabel setFont: [UIFont fontWithName:@"Helvetica" size:14]];
         [self.bodyLabel setTextColor:[UIColor darkGrayColor]];
         [self.bodyLabel setBackgroundColor:[UIColor clearColor]];
 
         [self.contentView addSubview:self.titleLabel];
         [self.contentView addSubview:self.bodyLabel];
+        
+        [self updateFonts];
     }
     
     return self;
@@ -68,7 +68,7 @@
 - (void)updateConstraints {
     [super updateConstraints];
     
-    if (self.hasSetupConstraints) return;
+    if (self.didSetupConstraints) return;
 
     [self.contentView addConstraint:[NSLayoutConstraint
                                      constraintWithItem:self.titleLabel
@@ -135,8 +135,13 @@
                                       multiplier:1.0f
                                       constant:-(kLabelHorizontalInsets / 2)]];
     
-    self.hasSetupConstraints = YES;
-    
+    self.didSetupConstraints = YES;
+}
+
+- (void)updateFonts
+{
+    self.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    self.bodyLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
