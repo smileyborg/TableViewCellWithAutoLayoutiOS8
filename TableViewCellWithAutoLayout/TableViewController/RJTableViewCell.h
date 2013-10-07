@@ -33,4 +33,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *bodyLabel;
 
+- (void)updateFonts;
+
 @end
