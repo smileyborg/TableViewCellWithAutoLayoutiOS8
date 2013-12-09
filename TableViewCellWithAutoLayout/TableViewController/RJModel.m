@@ -36,11 +36,19 @@
     return self;
 }
 
+- (NSMutableArray *)dataSource
+{
+    if (!_dataSource) {
+        _dataSource = [NSMutableArray new];
+    }
+    return _dataSource;
+}
+
 - (void)populateDataSource {
     
     NSArray *fontFamilies = [NSArray arrayWithArray:[UIFont familyNames]];
     NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[fontFamilies count]];
-
+    
     for ( NSString *familyName in fontFamilies ) {
         NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:familyName, @"title",
                                     [self randomLorumIpsum], @"body",
@@ -51,7 +59,25 @@
         [result addObject:dictionary];
     }
     
-    self.dataSource = [NSArray arrayWithArray:result];
+    self.dataSource = result;
+    
+}
+
+- (void)addSingleItemToDataSource {
+    
+    NSArray *fontFamilies = [NSArray arrayWithArray:[UIFont familyNames]];
+    
+    int r = arc4random() % [fontFamilies count];
+    NSString *familyName = [fontFamilies objectAtIndex:r];
+    
+    NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:familyName, @"title",
+                                [self randomLorumIpsum], @"body",
+                                @"", @"element2",
+                                @"", @"element3",
+                                @"", @"element4",
+                                nil];
+    
+    [self.dataSource addObject:dictionary];
     
 }
 

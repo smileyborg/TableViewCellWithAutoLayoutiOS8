@@ -31,7 +31,14 @@
 static NSString *CellIdentifier = @"CellIdentifier";
 
 @interface RJTableViewController ()
+
 @property (strong, nonatomic) RJModel *model;
+
+// This property is used to work around the constraint exception that is thrown if the
+// estimated row height for an inserted row is greater than the actual height for that row.
+// See: https://github.com/caoimghgin/TableViewCellWithAutoLayout/issues/6
+@property (assign, nonatomic) BOOL isInsertingRow;
+
 @end
 
 @implementation RJTableViewController
@@ -53,6 +60,10 @@ static NSString *CellIdentifier = @"CellIdentifier";
     [super viewDidLoad];
     
     [self.tableView registerClass:[RJTableViewCell class] forCellReuseIdentifier:CellIdentifier];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(clear:)];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addRow:)];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -83,6 +94,32 @@ static NSString *CellIdentifier = @"CellIdentifier";
 - (void)contentSizeCategoryChanged:(NSNotification *)notification
 {
     [self.tableView reloadData];
+}
+
+- (void)clear:(id)sender
+{
+    NSMutableArray *rowsToDelete = [NSMutableArray new];
+    for (NSUInteger i = 0; i < [self.model.dataSource count]; i++) {
+        [rowsToDelete addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+    }
+    
+    self.model = [[RJModel alloc] init];
+    
+    [self.tableView deleteRowsAtIndexPaths:rowsToDelete withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [self.tableView reloadData];
+}
+
+- (void)addRow:(id)sender
+{
+    [self.model addSingleItemToDataSource];
+    
+    self.isInsertingRow = YES;
+    
+    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:[self.model.dataSource count] - 1 inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[lastIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    self.isInsertingRow = NO;
 }
 
 #pragma mark - Table view data source
@@ -143,7 +180,15 @@ static NSString *CellIdentifier = @"CellIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 500.0f;
+    if (self.isInsertingRow) {
+        // A constraint exception will be thrown if the estimated row height for an inserted row is greater
+        // than the actual height for that row. In order to work around this, we return the actual height
+        // for the the row when inserting into the table view.
+        // See: https://github.com/caoimghgin/TableViewCellWithAutoLayout/issues/6
+        return [self tableView:tableView heightForRowAtIndexPath:indexPath];
+    } else {
+        return 500.0f;
+    }
 }
 
 @end
