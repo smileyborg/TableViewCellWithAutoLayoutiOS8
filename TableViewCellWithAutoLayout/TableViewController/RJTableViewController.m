@@ -147,6 +147,13 @@ static NSString *CellIdentifier = @"CellIdentifier";
     
     // Make sure the constraints have been added to this cell, since it may have just been created from scratch
     [cell setNeedsUpdateConstraints];
+    [cell updateConstraintsIfNeeded];
+    
+    // Since we have multi-line labels, do an initial layout pass and then set the preferredMaxLayoutWidth
+    // based on their width so they will wrap text and take on the correct height
+    [cell.contentView setNeedsLayout];
+    [cell.contentView layoutIfNeeded];
+    cell.bodyLabel.preferredMaxLayoutWidth = CGRectGetWidth(cell.bodyLabel.frame);
     
     return cell;
 }
