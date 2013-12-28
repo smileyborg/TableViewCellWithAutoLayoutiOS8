@@ -22,6 +22,7 @@
 		99BCDCDA18008C1700B8E66B /* RJModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCD518008C1700B8E66B /* RJModel.m */; };
 		99BCDCDB18008C1700B8E66B /* RJTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCD718008C1700B8E66B /* RJTableViewCell.m */; };
 		99BCDCDC18008C1700B8E66B /* RJTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCD918008C1700B8E66B /* RJTableViewController.m */; };
+		B147F1841867A715002B0C25 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B147F1831867A715002B0C25 /* UIView+AutoLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		99BCDCD718008C1700B8E66B /* RJTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJTableViewCell.m; sourceTree = "<group>"; };
 		99BCDCD818008C1700B8E66B /* RJTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJTableViewController.h; sourceTree = "<group>"; };
 		99BCDCD918008C1700B8E66B /* RJTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJTableViewController.m; sourceTree = "<group>"; };
+		B147F1821867A715002B0C25 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		B147F1831867A715002B0C25 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +119,7 @@
 		99BCDCAA18008C0000B8E66B /* TableViewCellWithAutoLayout */ = {
 			isa = PBXGroup;
 			children = (
+				B147F1811867A715002B0C25 /* UIView+AutoLayout */,
 				99BCDCB318008C0000B8E66B /* RJAppDelegate.h */,
 				99BCDCB418008C0000B8E66B /* RJAppDelegate.m */,
 				99BCDCB618008C0000B8E66B /* Images.xcassets */,
@@ -165,6 +169,15 @@
 				99BCDCD918008C1700B8E66B /* RJTableViewController.m */,
 			);
 			path = TableViewController;
+			sourceTree = "<group>";
+		};
+		B147F1811867A715002B0C25 /* UIView+AutoLayout */ = {
+			isa = PBXGroup;
+			children = (
+				B147F1821867A715002B0C25 /* UIView+AutoLayout.h */,
+				B147F1831867A715002B0C25 /* UIView+AutoLayout.m */,
+			);
+			path = "UIView+AutoLayout";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99BCDCB518008C0000B8E66B /* RJAppDelegate.m in Sources */,
+				B147F1841867A715002B0C25 /* UIView+AutoLayout.m in Sources */,
 				99BCDCDC18008C1700B8E66B /* RJTableViewController.m in Sources */,
 				99BCDCB118008C0000B8E66B /* main.m in Sources */,
 				99BCDCDA18008C1700B8E66B /* RJModel.m in Sources */,
@@ -470,6 +484,7 @@
 				99BCDCCF18008C0000B8E66B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		99BCDCD018008C0000B8E66B /* Build configuration list for PBXNativeTarget "TableViewCellWithAutoLayoutTests" */ = {
 			isa = XCConfigurationList;
@@ -478,6 +493,7 @@
 				99BCDCD218008C0000B8E66B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

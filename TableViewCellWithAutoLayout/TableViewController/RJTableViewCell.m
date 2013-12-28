@@ -26,7 +26,8 @@
 
 #import "RJTableViewCell.h"
 
-#define kLabelHorizontalInsets 20.0f
+#define kLabelHorizontalInsets      15.0f
+#define kLabelVerticalInsets        10.0f
 
 @interface RJTableViewCell ()
 
@@ -40,23 +41,22 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        [self.titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+        self.titleLabel = [UILabel newAutoLayoutView];
         [self.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         [self.titleLabel setNumberOfLines:1];
         [self.titleLabel setTextAlignment:NSTextAlignmentLeft];
         [self.titleLabel setTextColor:[UIColor blackColor]];
-        [self.titleLabel setBackgroundColor:[UIColor clearColor]];
+        self.titleLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:1 alpha:0.1];
         
-        self.bodyLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        [self.bodyLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.bodyLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+        self.bodyLabel = [UILabel newAutoLayoutView];
         [self.bodyLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         [self.bodyLabel setNumberOfLines:0];
         [self.bodyLabel setTextAlignment:NSTextAlignmentLeft];
         [self.bodyLabel setTextColor:[UIColor darkGrayColor]];
-        [self.bodyLabel setBackgroundColor:[UIColor clearColor]];
-
+        self.bodyLabel.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.1];
+        
+        self.contentView.backgroundColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:0.1];
+        
         [self.contentView addSubview:self.titleLabel];
         [self.contentView addSubview:self.bodyLabel];
         
@@ -70,85 +70,42 @@
 {
     [super updateConstraints];
     
-    if (self.didSetupConstraints) return;
-
-    [self.contentView addConstraint:[NSLayoutConstraint
-                                     constraintWithItem:self.titleLabel
-                                     attribute:NSLayoutAttributeLeading
-                                     relatedBy:NSLayoutRelationEqual
-                                     toItem:self.contentView
-                                     attribute:NSLayoutAttributeLeading
-                                     multiplier:1.0f
-                                     constant:kLabelHorizontalInsets]];
+    if (self.didSetupConstraints) {
+        return;
+    }
     
-    [self.contentView addConstraint:[NSLayoutConstraint
-                                     constraintWithItem:self.titleLabel
-                                     attribute:NSLayoutAttributeTop
-                                     relatedBy:NSLayoutRelationEqual
-                                     toItem:self.contentView
-                                     attribute:NSLayoutAttributeTop
-                                     multiplier:1.0f
-                                     constant:(kLabelHorizontalInsets / 2)]];
+    [self.titleLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+    [self.titleLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:kLabelVerticalInsets];
+    [self.titleLabel autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:kLabelHorizontalInsets];
+    [self.titleLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:kLabelHorizontalInsets];
     
-    [self.contentView addConstraint:[NSLayoutConstraint
-                                     constraintWithItem:self.titleLabel
-                                     attribute:NSLayoutAttributeTrailing
-                                     relatedBy:NSLayoutRelationEqual
-                                     toItem:self.contentView
-                                     attribute:NSLayoutAttributeTrailing
-                                     multiplier:1.0f
-                                     constant:-kLabelHorizontalInsets]];
-    
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    [self.contentView  addConstraint:[NSLayoutConstraint
-                                      constraintWithItem:self.bodyLabel
-                                      attribute:NSLayoutAttributeLeading
-                                      relatedBy:NSLayoutRelationEqual
-                                      toItem:self.contentView
-                                      attribute:NSLayoutAttributeLeading
-                                      multiplier:1.0f
-                                      constant:kLabelHorizontalInsets]];
-    
-    [self.contentView  addConstraint:[NSLayoutConstraint
-                                      constraintWithItem:self.bodyLabel
-                                      attribute:NSLayoutAttributeTop
-                                      relatedBy:NSLayoutRelationEqual
-                                      toItem:self.titleLabel
-                                      attribute:NSLayoutAttributeBottom
-                                      multiplier:1.0f
-                                      constant:(kLabelHorizontalInsets / 4)]];
-    
-    [self.contentView  addConstraint:[NSLayoutConstraint
-                                      constraintWithItem:self.bodyLabel
-                                      attribute:NSLayoutAttributeTrailing
-                                      relatedBy:NSLayoutRelationEqual
-                                      toItem:self.contentView
-                                      attribute:NSLayoutAttributeTrailing
-                                      multiplier:1.0f
-                                      constant:-kLabelHorizontalInsets]];
-    
-    [self.contentView  addConstraint:[NSLayoutConstraint
-                                      constraintWithItem:self.bodyLabel
-                                      attribute:NSLayoutAttributeBottom
-                                      relatedBy:NSLayoutRelationEqual
-                                      toItem:self.contentView
-                                      attribute:NSLayoutAttributeBottom
-                                      multiplier:1.0f
-                                      constant:-(kLabelHorizontalInsets / 2)]];
+    [self.bodyLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+    [self.bodyLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel withOffset:kLabelVerticalInsets];
+    [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:kLabelHorizontalInsets];
+    [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:kLabelHorizontalInsets];
+    [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:kLabelVerticalInsets];
     
     self.didSetupConstraints = YES;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    // The below call to layoutSubviews on the table view cell's contentView should NOT be necessary.
+    // However, in some (but not all!) cases it appears as though the super implementation does not call
+    // layoutSubviews on the contentView, which causes all the UILabels to have a frame of CGRectZero.
+    [self.contentView layoutSubviews];
+    
+    // Set the preferredMaxLayoutWidth of the mutli-line bodyLabel based on the evaluated width of the label's frame,
+    // as this will allow the text to wrap correctly, and as a result allow the label to take on the correct height.
+    self.bodyLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.bodyLabel.frame);
 }
 
 - (void)updateFonts
 {
     self.titleLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
     self.bodyLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption2];
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
 }
 
 @end
