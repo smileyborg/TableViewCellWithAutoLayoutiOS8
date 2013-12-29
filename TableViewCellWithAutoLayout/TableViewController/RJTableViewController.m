@@ -47,8 +47,6 @@ static NSString *CellIdentifier = @"CellIdentifier";
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
-        self.title = @"Table View Controller";
         self.model = [[RJModel alloc] init];
         [self.model populateDataSource];
     }
@@ -61,9 +59,11 @@ static NSString *CellIdentifier = @"CellIdentifier";
         
     [self.tableView registerClass:[RJTableViewCell class] forCellReuseIdentifier:CellIdentifier];
     
+    self.title = @"Auto Layout Table View";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(clear:)];
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addRow:)];
+    
+    self.tableView.allowsSelection = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated
