@@ -175,8 +175,8 @@ static NSString *CellIdentifier = @"CellIdentifier";
     // Get the actual height required for the cell
     CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     
-    // Add an extra point to the height to account for internal rounding errors that are occasionally observed in
-    // the Auto Layout engine, which cause the returned height to be slightly too small in some cases.
+    // Add an extra point to the height to account for the cell separator, which is added between the bottom
+    // of the cell's contentView and the bottom of the table view cell.
     height += 1;
     
     return height;
