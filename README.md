@@ -1,11 +1,12 @@
 TableViewCellWithAutoLayout
 ===========================
 
-Sample of TableViewCell use with Auto Layout.
+Demonstration of using Auto Layout in UITableViewCell for dynamic variable row heights. Requires Xcode 5 and iOS 7.
 
-An example of using auto-layout in iOS7 as explained in...
+This sample project displays a table view with cells that contain a single line title label, and a multi-line body label (which contains a random amount of text per cell).
 
-http://stackoverflow.com/questions/18746929/using-auto-layout-within-uitableviewcell-for-dynamic-cell-layouts 
+See the original post on Stack Overflow for more info:
 
-Original stackoverflow poster, @smileyborg, modified code to make functional, providing an excellent example of programmatically 
-creating UITableViewCells with autolayout. 
+http://stackoverflow.com/questions/18746929/using-auto-layout-in-uitableview-for-dynamic-cell-layouts-variable-row-heights
+
+If you have questions or run into issues, please [open a new Issue on this GitHub project](https://github.com/smileyborg/TableViewCellWithAutoLayout/issues/new) or reach out to me on Twitter [@smileyborg](https://twitter.com/smileyborg).
