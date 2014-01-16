@@ -97,10 +97,10 @@
 {
     [super layoutSubviews];
     
-    // The below call to layoutSubviews on the table view cell's contentView should NOT be necessary.
-    // However, in some (but not all!) cases it appears as though the super implementation does not call
-    // layoutSubviews on the contentView, which causes all the UILabels to have a frame of CGRectZero.
-    [self.contentView layoutSubviews];
+    // Make sure the contentView does a layout pass here so that its subviews have their frames set, which we
+    // need to use to set the preferredMaxLayoutWidth below.
+    [self.contentView setNeedsLayout];
+    [self.contentView layoutIfNeeded];
     
     // Set the preferredMaxLayoutWidth of the mutli-line bodyLabel based on the evaluated width of the label's frame,
     // as this will allow the text to wrap correctly, and as a result allow the label to take on the correct height.
