@@ -34,6 +34,11 @@ static NSString *CellIdentifier = @"CellIdentifier";
 
 @property (strong, nonatomic) RJModel *model;
 
+// A dictionary of offscreen cells that are used within the tableView:heightForRowAtIndexPath: method to
+// handle the height calculations. These are never drawn onscreen. The dictionary is in the format:
+//      { NSString *reuseIdentifier : UITableViewCell *offscreenCell, ... }
+@property (strong, nonatomic) NSMutableDictionary *offscreenCells;
+
 // This property is used to work around the constraint exception that is thrown if the
 // estimated row height for an inserted row is greater than the actual height for that row.
 // See: https://github.com/caoimghgin/TableViewCellWithAutoLayout/issues/6
@@ -49,6 +54,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
     if (self) {
         self.model = [[RJModel alloc] init];
         [self.model populateDataSource];
+        self.offscreenCells = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -148,7 +154,19 @@ static NSString *CellIdentifier = @"CellIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    RJTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    // This project has only one cell identifier, but if you are have more than one, this is the time
+    // to figure out which reuse identifier should be used for the cell at this index path.
+    NSString *reuseIdentifier = CellIdentifier;
+    
+    // Use the dictionary of offscreen cells to get a cell for the reuse identifier, creating a cell and storing
+    // it in the dictionary if one hasn't already been added for the reuse identifier.
+    // WARNING: Don't call the table view's dequeueReusableCellWithIdentifier: method here because this will result
+    // in a memory leak as the cell is created but never returned from the tableView:cellForRowAtIndexPath: method!
+    RJTableViewCell *cell = [self.offscreenCells objectForKey:reuseIdentifier];
+    if (!cell) {
+        cell = [[RJTableViewCell alloc] init];
+        [self.offscreenCells setObject:cell forKey:reuseIdentifier];
+    }
     
     // Configure the cell for this indexPath
     [cell updateFonts];
