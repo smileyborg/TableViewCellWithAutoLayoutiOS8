@@ -213,7 +213,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
         // See: https://github.com/caoimghgin/TableViewCellWithAutoLayout/issues/6
         return [self tableView:tableView heightForRowAtIndexPath:indexPath];
     } else {
-        return 500.0f;
+        return UITableViewAutomaticDimension;
     }
 }
 
