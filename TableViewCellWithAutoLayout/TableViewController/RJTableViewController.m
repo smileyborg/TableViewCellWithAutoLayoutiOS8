@@ -39,6 +39,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
 //      { NSString *reuseIdentifier : UITableViewCell *offscreenCell, ... }
 @property (strong, nonatomic) NSMutableDictionary *offscreenCells;
 
+// For iOS 7.0.x compatibility ONLY (this bug is fixed in iOS 7.1):
 // This property is used to work around the constraint exception that is thrown if the
 // estimated row height for an inserted row is greater than the actual height for that row.
 // See: https://github.com/caoimghgin/TableViewCellWithAutoLayout/issues/6
@@ -206,15 +207,16 @@ static NSString *CellIdentifier = @"CellIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.isInsertingRow) {
-        // A constraint exception will be thrown if the estimated row height for an inserted row is greater
-        // than the actual height for that row. In order to work around this, we return the actual height
-        // for the the row when inserting into the table view.
-        // See: https://github.com/caoimghgin/TableViewCellWithAutoLayout/issues/6
-        return [self tableView:tableView heightForRowAtIndexPath:indexPath];
-    } else {
-        return UITableViewAutomaticDimension;
-    }
+    // NOTE for iOS 7.0.x ONLY, this bug has been fixed by Apple as of iOS 7.1:
+    // A constraint exception will be thrown if the estimated row height for an inserted row is greater
+    // than the actual height for that row. In order to work around this, we need to return the actual
+    // height for the the row when inserting into the table view - uncomment the below 3 lines of code.
+    // See: https://github.com/caoimghgin/TableViewCellWithAutoLayout/issues/6
+    //    if (self.isInsertingRow) {
+    //        return [self tableView:tableView heightForRowAtIndexPath:indexPath];
+    //    }
+    
+    return UITableViewAutomaticDimension;
 }
 
 @end
