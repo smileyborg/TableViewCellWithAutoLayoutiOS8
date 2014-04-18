@@ -63,12 +63,16 @@ static NSString *CellIdentifier = @"CellIdentifier";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
-    [self.tableView registerClass:[RJTableViewCell class] forCellReuseIdentifier:CellIdentifier];
     
     self.title = @"Auto Layout Table View";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(clear:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addRow:)];
+    
+    [self.tableView registerClass:[RJTableViewCell class] forCellReuseIdentifier:CellIdentifier];
+    
+    // Setting the estimated row height prevents the table view from calling tableView:heightForRowAtIndexPath: for every row in the table on first load;
+    // it will only be called as cells are about to scroll onscreen. This is a major performance optimization.
+    self.tableView.estimatedRowHeight = UITableViewAutomaticDimension;
     
     self.tableView.allowsSelection = NO;
 }
@@ -205,8 +209,17 @@ static NSString *CellIdentifier = @"CellIdentifier";
     return height;
 }
 
+/*
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // If you are just returning a constant value from this method, you should instead just set the table view's
+    // estimatedRowHeight property (in viewDidLoad or similar), which is even faster as the table view won't
+    // have to call this method for every row in the table view.
+    //
+    // Only implement this method if you have row heights that vary by extreme amounts and you notice the scroll indicator
+    // "jumping" as you scroll the table view when using a constant estimatedRowHeight. If you do implement this method,
+    // be sure to do as little work as possible to get a reasonably-accurate estimate.
+ 
     // NOTE for iOS 7.0.x ONLY, this bug has been fixed by Apple as of iOS 7.1:
     // A constraint exception will be thrown if the estimated row height for an inserted row is greater
     // than the actual height for that row. In order to work around this, we need to return the actual
@@ -218,5 +231,6 @@ static NSString *CellIdentifier = @"CellIdentifier";
     
     return UITableViewAutomaticDimension;
 }
+*/
 
 @end
