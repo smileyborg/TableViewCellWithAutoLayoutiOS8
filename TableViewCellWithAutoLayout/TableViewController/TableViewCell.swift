@@ -9,8 +9,8 @@ import UIKit
 
 class TableViewCell: UITableViewCell
 {
-    let labelHorizontalInsets = 15.0
-    let labelVerticalInsets = 10.0
+    let kLabelHorizontalInsets = 15.0
+    let kLabelVerticalInsets = 10.0
     
     var didSetupConstraints = false
     
@@ -56,22 +56,27 @@ class TableViewCell: UITableViewCell
         //      See here for further discussion: https://github.com/Alex311/TableCellWithAutoLayout/commit/bde387b27e33605eeac3465475d2f2ff9775f163#commitcomment-4633188
         // contentView.bounds = CGRect(x: 0.0, y: 0.0, width: 99999.0, height: 99999.0)
         
+        // Prevent the two UILabels from being compressed below their intrinsic content height
+        // FIXME 7-Jun-14 Xcode 6b1: Apple Bug Report Radar #17220525: The UILayoutPriority enum is not compatible with Swift yet!
+        // As a temporary workaround, we're using the raw value of UILayoutPriorityRequired = 1000
         UIView.autoSetPriority(1000) {
             self.titleLabel.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
-        }
-        titleLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: labelVerticalInsets)
-        titleLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: labelHorizontalInsets)
-        titleLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: labelHorizontalInsets)
-        
-        // This constraint is an inequality so that if the cell is slightly taller than actually required, extra space will go here
-        bodyLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: titleLabel, withOffset: labelVerticalInsets, relation: .GreaterThanOrEqual)
-        
-        UIView.autoSetPriority(1000) {
             self.bodyLabel.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
         }
-        bodyLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: labelHorizontalInsets)
-        bodyLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: labelHorizontalInsets)
-        bodyLabel.autoPinEdgeToSuperviewEdge(.Bottom, withInset: labelVerticalInsets)
+        
+        // FIXME 7-Jun-14 Xcode 6b1: The Double literals below should refer to the defined constants kLabelHorizontalInsets and kLabelVerticalInsets.
+        // However, there are currently intermittent compiler failures when the literals are replaced with these constants. For example, 'Could not find member .Top'
+        
+        titleLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: 10.0)
+        titleLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: 15.0)
+        titleLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 15.0)
+        
+        // This constraint is an inequality so that if the cell is slightly taller than actually required, extra space will go here
+        bodyLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: titleLabel, withOffset: 10.0, relation: .GreaterThanOrEqual)
+        
+        bodyLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: 15.0)
+        bodyLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 15.0)
+        bodyLabel.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 10.0)
         
         didSetupConstraints = true
     }
