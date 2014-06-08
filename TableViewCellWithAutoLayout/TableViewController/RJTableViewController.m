@@ -103,9 +103,7 @@ static NSString *CellIdentifier = @"CellIdentifier";
     
     self.model = [[RJModel alloc] init];
     
-    [self.tableView deleteRowsAtIndexPaths:rowsToDelete withRowAnimation:UITableViewRowAnimationAutomatic];
-    
-    [self.tableView reloadData];
+    [self.tableView deleteRowsAtIndexPaths:rowsToDelete withRowAnimation:UITableViewRowAnimationAutomatic];    
 }
 
 - (void)addRow:(id)sender
