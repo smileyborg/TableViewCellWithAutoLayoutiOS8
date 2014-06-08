@@ -11,17 +11,16 @@
 		99BCDCA718008C0000B8E66B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BCDCA618008C0000B8E66B /* CoreGraphics.framework */; };
 		99BCDCA918008C0000B8E66B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BCDCA818008C0000B8E66B /* UIKit.framework */; };
 		99BCDCAF18008C0000B8E66B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 99BCDCAD18008C0000B8E66B /* InfoPlist.strings */; };
-		99BCDCB118008C0000B8E66B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCB018008C0000B8E66B /* main.m */; };
-		99BCDCB518008C0000B8E66B /* RJAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCB418008C0000B8E66B /* RJAppDelegate.m */; };
 		99BCDCB718008C0000B8E66B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99BCDCB618008C0000B8E66B /* Images.xcassets */; };
 		99BCDCBE18008C0000B8E66B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BCDCBD18008C0000B8E66B /* XCTest.framework */; };
 		99BCDCBF18008C0000B8E66B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BCDCA418008C0000B8E66B /* Foundation.framework */; };
 		99BCDCC018008C0000B8E66B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BCDCA818008C0000B8E66B /* UIKit.framework */; };
 		99BCDCC818008C0000B8E66B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 99BCDCC618008C0000B8E66B /* InfoPlist.strings */; };
 		99BCDCCA18008C0000B8E66B /* TableViewCellWithAutoLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCC918008C0000B8E66B /* TableViewCellWithAutoLayoutTests.m */; };
-		99BCDCDA18008C1700B8E66B /* RJModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCD518008C1700B8E66B /* RJModel.m */; };
-		99BCDCDB18008C1700B8E66B /* RJTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCD718008C1700B8E66B /* RJTableViewCell.m */; };
-		99BCDCDC18008C1700B8E66B /* RJTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCD918008C1700B8E66B /* RJTableViewController.m */; };
+		A7C103221943F73D006A9720 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C103211943F73D006A9720 /* TableViewCell.swift */; };
+		A7F5DDAA194408D9008E238B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5DDA9194408D9008E238B /* AppDelegate.swift */; };
+		A7F5DDAC19440B7B008E238B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5DDAB19440B7B008E238B /* Model.swift */; };
+		A7F5DDAE194417DC008E238B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5DDAD194417DC008E238B /* TableViewController.swift */; };
 		B147F1841867A715002B0C25 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B147F1831867A715002B0C25 /* UIView+AutoLayout.m */; };
 /* End PBXBuildFile section */
 
@@ -42,22 +41,18 @@
 		99BCDCA818008C0000B8E66B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		99BCDCAC18008C0000B8E66B /* TableViewCellWithAutoLayout-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TableViewCellWithAutoLayout-Info.plist"; sourceTree = "<group>"; };
 		99BCDCAE18008C0000B8E66B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		99BCDCB018008C0000B8E66B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		99BCDCB218008C0000B8E66B /* TableViewCellWithAutoLayout-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TableViewCellWithAutoLayout-Prefix.pch"; sourceTree = "<group>"; };
-		99BCDCB318008C0000B8E66B /* RJAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RJAppDelegate.h; sourceTree = "<group>"; };
-		99BCDCB418008C0000B8E66B /* RJAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RJAppDelegate.m; sourceTree = "<group>"; };
 		99BCDCB618008C0000B8E66B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		99BCDCBC18008C0000B8E66B /* TableViewCellWithAutoLayoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableViewCellWithAutoLayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		99BCDCBD18008C0000B8E66B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		99BCDCC518008C0000B8E66B /* TableViewCellWithAutoLayoutTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TableViewCellWithAutoLayoutTests-Info.plist"; sourceTree = "<group>"; };
 		99BCDCC718008C0000B8E66B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		99BCDCC918008C0000B8E66B /* TableViewCellWithAutoLayoutTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewCellWithAutoLayoutTests.m; sourceTree = "<group>"; };
-		99BCDCD418008C1700B8E66B /* RJModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJModel.h; sourceTree = "<group>"; };
-		99BCDCD518008C1700B8E66B /* RJModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJModel.m; sourceTree = "<group>"; };
-		99BCDCD618008C1700B8E66B /* RJTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJTableViewCell.h; sourceTree = "<group>"; };
-		99BCDCD718008C1700B8E66B /* RJTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJTableViewCell.m; sourceTree = "<group>"; };
-		99BCDCD818008C1700B8E66B /* RJTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJTableViewController.h; sourceTree = "<group>"; };
-		99BCDCD918008C1700B8E66B /* RJTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJTableViewController.m; sourceTree = "<group>"; };
+		A7C103201943F73C006A9720 /* TableViewCellWithAutoLayout-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TableViewCellWithAutoLayout-Bridging-Header.h"; sourceTree = "<group>"; };
+		A7C103211943F73D006A9720 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		A7F5DDA9194408D9008E238B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A7F5DDAB19440B7B008E238B /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		A7F5DDAD194417DC008E238B /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		B147F1821867A715002B0C25 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
 		B147F1831867A715002B0C25 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,8 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				B147F1811867A715002B0C25 /* UIView+AutoLayout */,
-				99BCDCB318008C0000B8E66B /* RJAppDelegate.h */,
-				99BCDCB418008C0000B8E66B /* RJAppDelegate.m */,
+				A7F5DDA9194408D9008E238B /* AppDelegate.swift */,
 				99BCDCB618008C0000B8E66B /* Images.xcassets */,
 				99BCDCD318008C1700B8E66B /* TableViewController */,
 				99BCDCAB18008C0000B8E66B /* Supporting Files */,
@@ -134,7 +128,6 @@
 			children = (
 				99BCDCAC18008C0000B8E66B /* TableViewCellWithAutoLayout-Info.plist */,
 				99BCDCAD18008C0000B8E66B /* InfoPlist.strings */,
-				99BCDCB018008C0000B8E66B /* main.m */,
 				99BCDCB218008C0000B8E66B /* TableViewCellWithAutoLayout-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -161,12 +154,10 @@
 		99BCDCD318008C1700B8E66B /* TableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				99BCDCD418008C1700B8E66B /* RJModel.h */,
-				99BCDCD518008C1700B8E66B /* RJModel.m */,
-				99BCDCD618008C1700B8E66B /* RJTableViewCell.h */,
-				99BCDCD718008C1700B8E66B /* RJTableViewCell.m */,
-				99BCDCD818008C1700B8E66B /* RJTableViewController.h */,
-				99BCDCD918008C1700B8E66B /* RJTableViewController.m */,
+				A7C103201943F73C006A9720 /* TableViewCellWithAutoLayout-Bridging-Header.h */,
+				A7F5DDAB19440B7B008E238B /* Model.swift */,
+				A7C103211943F73D006A9720 /* TableViewCell.swift */,
+				A7F5DDAD194417DC008E238B /* TableViewController.swift */,
 			);
 			path = TableViewController;
 			sourceTree = "<group>";
@@ -276,12 +267,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99BCDCB518008C0000B8E66B /* RJAppDelegate.m in Sources */,
 				B147F1841867A715002B0C25 /* UIView+AutoLayout.m in Sources */,
-				99BCDCDC18008C1700B8E66B /* RJTableViewController.m in Sources */,
-				99BCDCB118008C0000B8E66B /* main.m in Sources */,
-				99BCDCDA18008C1700B8E66B /* RJModel.m in Sources */,
-				99BCDCDB18008C1700B8E66B /* RJTableViewCell.m in Sources */,
+				A7F5DDAE194417DC008E238B /* TableViewController.swift in Sources */,
+				A7F5DDAA194408D9008E238B /* AppDelegate.swift in Sources */,
+				A7F5DDAC19440B7B008E238B /* Model.swift in Sources */,
+				A7C103221943F73D006A9720 /* TableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,11 +392,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewCellWithAutoLayout/TableViewCellWithAutoLayout-Prefix.pch";
 				INFOPLIST_FILE = "TableViewCellWithAutoLayout/TableViewCellWithAutoLayout-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TableViewCellWithAutoLayout/TableViewController/TableViewCellWithAutoLayout-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -416,11 +410,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewCellWithAutoLayout/TableViewCellWithAutoLayout-Prefix.pch";
 				INFOPLIST_FILE = "TableViewCellWithAutoLayout/TableViewCellWithAutoLayout-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TableViewCellWithAutoLayout/TableViewController/TableViewCellWithAutoLayout-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
