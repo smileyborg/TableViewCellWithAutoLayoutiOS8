@@ -1,6 +1,6 @@
 //
 //  UIView+AutoLayout.h
-//  v1.2.0
+//  v2.0.0
 //  https://github.com/smileyborg/UIView-AutoLayout
 //
 //  Copyright (c) 2012 Richard Turton
@@ -87,22 +87,22 @@ typedef void(^ALConstraintsBlock)(void);    // a block of method calls to the UI
 + (void)autoRemoveConstraints:(NSArray *)constraints;
 
 /** Removes all explicit constraints that affect the view.
-    WARNING: Apple's constraint solver is not optimized for large-scale constraint changes; you may encounter major performance issues after using this method.
+    WARNING: Apple's constraint solver is not optimized for large-scale constraint removal; you may encounter major performance issues after using this method.
     NOTE: This method preserves implicit constraints, such as intrinsic content size constraints, which you usually do not want to remove. */
 - (void)autoRemoveConstraintsAffectingView;
 
 /** Removes all constraints that affect the view, optionally including implicit constraints.
-    WARNING: Apple's constraint solver is not optimized for large-scale constraint changes; you may encounter major performance issues after using this method.
+    WARNING: Apple's constraint solver is not optimized for large-scale constraint removal; you may encounter major performance issues after using this method.
     NOTE: Implicit constraints are auto-generated lower priority constraints, and you usually do not want to remove these. */
 - (void)autoRemoveConstraintsAffectingViewIncludingImplicitConstraints:(BOOL)shouldRemoveImplicitConstraints;
 
 /** Recursively removes all explicit constraints that affect the view and its subviews.
-    WARNING: Apple's constraint solver is not optimized for large-scale constraint changes; you may encounter major performance issues after using this method.
+    WARNING: Apple's constraint solver is not optimized for large-scale constraint removal; you may encounter major performance issues after using this method.
     NOTE: This method preserves implicit constraints, such as intrinsic content size constraints, which you usually do not want to remove. */
 - (void)autoRemoveConstraintsAffectingViewAndSubviews;
 
 /** Recursively removes all constraints from the view and its subviews, optionally including implicit constraints.
-    WARNING: Apple's constraint solver is not optimized for large-scale constraint changes; you may encounter major performance issues after using this method.
+    WARNING: Apple's constraint solver is not optimized for large-scale constraint removal; you may encounter major performance issues after using this method.
     NOTE: Implicit constraints are auto-generated lower priority constraints, and you usually do not want to remove these. */
 - (void)autoRemoveConstraintsAffectingViewAndSubviewsIncludingImplicitConstraints:(BOOL)shouldRemoveImplicitConstraints;
 
@@ -126,6 +126,9 @@ typedef void(^ALConstraintsBlock)(void);    // a block of method calls to the UI
 
 /** Pins the edges of the view to the edges of its superview with the given edge insets. */
 - (NSArray *)autoPinEdgesToSuperviewEdgesWithInsets:(UIEdgeInsets)insets;
+
+/** Pins 3 of the 4 edges of the view to the edges of its superview with the given edge insets, excluding one edge. */
+- (NSArray *)autoPinEdgesToSuperviewEdgesWithInsets:(UIEdgeInsets)insets excludingEdge:(ALEdge)edge;
 
 
 #pragma mark Pin Edges
@@ -216,22 +219,6 @@ typedef void(^ALConstraintsBlock)(void);    // a block of method calls to the UI
 /** Pins the bottom edge of the view to the bottom layout guide of the given view controller with an inset. */
 - (NSLayoutConstraint *)autoPinToBottomLayoutGuideOfViewController:(UIViewController *)viewController withInset:(CGFloat)inset;
 
-
-#pragma mark Deprecated API Methods
-
-/** DEPRECATED as of v1.1, will be removed at some point in the future. Use -[autoAlignAxisToSuperviewAxis:] instead.
- (This method has simply been renamed due to confusion. The replacement method works identically.)
- Centers the view along the given axis (horizontal or vertical) within its superview. */
-- (NSLayoutConstraint *)autoCenterInSuperviewAlongAxis:(ALAxis)axis __attribute__((deprecated));
-
-/** DEPRECATED as of v1.1, will be removed at some point in the future. Use -[autoConstrainAttribute:toAttribute:ofView:withOffset:] instead.
- Pins the given center axis of the view to a fixed position (X or Y value, depending on axis) in the superview. */
-- (NSLayoutConstraint *)autoPinCenterAxis:(ALAxis)axis toPositionInSuperview:(CGFloat)value __attribute__((deprecated));
-
-/** DEPRECATED as of v1.1, will be removed at some point in the future. Use -[autoPinEdgeToSuperviewEdge:withInset:] instead.
- Pins the given edge of the view to a fixed position (X or Y value, depending on edge) in the superview. */
-- (NSLayoutConstraint *)autoPinEdge:(ALEdge)edge toPositionInSuperview:(CGFloat)value __attribute__((deprecated));
-
 @end
 
 
@@ -263,8 +250,14 @@ typedef void(^ALConstraintsBlock)(void);    // a block of method calls to the UI
 /** Distributes the views in this array equally along the selected axis in their superview. Views will be the same size (variable) in the dimension along the axis and will have spacing (fixed) between them. */
 - (NSArray *)autoDistributeViewsAlongAxis:(ALAxis)axis withFixedSpacing:(CGFloat)spacing alignment:(NSLayoutFormatOptions)alignment;
 
+/** Distributes the views in this array equally along the selected axis in their superview. Views will be the same size (variable) in the dimension along the axis and will have spacing (fixed) between them, with optional insets from the first and last views to their superview. */
+- (NSArray *)autoDistributeViewsAlongAxis:(ALAxis)axis withFixedSpacing:(CGFloat)spacing insetSpacing:(BOOL)shouldSpaceInsets alignment:(NSLayoutFormatOptions)alignment;
+
 /** Distributes the views in this array equally along the selected axis in their superview. Views will be the same size (fixed) in the dimension along the axis and will have spacing (variable) between them. */
 - (NSArray *)autoDistributeViewsAlongAxis:(ALAxis)axis withFixedSize:(CGFloat)size alignment:(NSLayoutFormatOptions)alignment;
+
+/** Distributes the views in this array equally along the selected axis in their superview. Views will be the same size (fixed) in the dimension along the axis and will have spacing (variable) between them, with optional insets from the first and last views to their superview. */
+- (NSArray *)autoDistributeViewsAlongAxis:(ALAxis)axis withFixedSize:(CGFloat)size insetSpacing:(BOOL)shouldSpaceInsets alignment:(NSLayoutFormatOptions)alignment;
 
 @end
 
@@ -275,6 +268,9 @@ typedef void(^ALConstraintsBlock)(void);    // a block of method calls to the UI
  A category on NSLayoutConstraint that allows constraints to be easily removed.
  */
 @interface NSLayoutConstraint (AutoLayout)
+
+/** Adds the constraint to the appropriate view. */
+- (void)autoInstall;
 
 /** Removes the constraint from the view it has been added to. */
 - (void)autoRemove;
