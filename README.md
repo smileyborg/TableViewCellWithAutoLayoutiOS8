@@ -1,7 +1,7 @@
 TableViewCellWithAutoLayout
 ===========================
 
-Demonstration of using Auto Layout in UITableViewCell to achieve dynamic layouts with variable row heights. This project requires Xcode 5 and iOS 7, is a universal app that will run on iPhone and iPad.
+Demonstration of using Auto Layout in UITableViewCell to achieve dynamic layouts with variable row heights. This project requires Xcode 5 and iOS 7, and is a universal app that will run on iPhone and iPad.
 
 This sample project displays a table view with cells that each contain a single-line title label and a multi-line body label (each cell's body label displays a random number of lorem ipsum words).
 
