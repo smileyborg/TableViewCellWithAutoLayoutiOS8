@@ -62,9 +62,10 @@ class TableViewCell: UITableViewCell
         titleLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: labelVerticalInsets)
         titleLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: labelHorizontalInsets)
         titleLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: labelHorizontalInsets)
-
-        bodyLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: titleLabel, withOffset: labelVerticalInsets)
-
+        
+        // This constraint is an inequality so that if the cell is slightly taller than actually required, extra space will go here
+        bodyLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: titleLabel, withOffset: labelVerticalInsets, relation: .GreaterThanOrEqual)
+        
         UIView.autoSetPriority(1000) {
             self.bodyLabel.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
         }
