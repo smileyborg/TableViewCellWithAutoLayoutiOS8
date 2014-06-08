@@ -46,16 +46,16 @@
         [self.titleLabel setNumberOfLines:1];
         [self.titleLabel setTextAlignment:NSTextAlignmentLeft];
         [self.titleLabel setTextColor:[UIColor blackColor]];
-        self.titleLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:1 alpha:0.1];
+        self.titleLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:1 alpha:0.1]; // light blue
         
         self.bodyLabel = [UILabel newAutoLayoutView];
         [self.bodyLabel setLineBreakMode:NSLineBreakByTruncatingTail];
         [self.bodyLabel setNumberOfLines:0];
         [self.bodyLabel setTextAlignment:NSTextAlignmentLeft];
         [self.bodyLabel setTextColor:[UIColor darkGrayColor]];
-        self.bodyLabel.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.1];
+        self.bodyLabel.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:0.1]; // light red
         
-        self.contentView.backgroundColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:0.1];
+        self.contentView.backgroundColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:0.1]; // light green
         
         [self.contentView addSubview:self.titleLabel];
         [self.contentView addSubview:self.bodyLabel];
@@ -86,12 +86,7 @@
     [self.titleLabel autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:kLabelHorizontalInsets];
     [self.titleLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:kLabelHorizontalInsets];
     
-    // This is the constraint that connects the title and body labels. It is a "greater than or equal" inequality so that if the row height is
-    // slightly larger than what is actually required to fit the cell's subviews, the extra space will go here. (This is the case on iOS 7
-    // where the cell separator is only 0.5 points tall, but in the tableView:heightForRowAtIndexPath: method of the view controller, we add
-    // a full 1.0 point in extra height to account for it, which results in 0.5 points extra space in the cell.)
-    // See https://github.com/smileyborg/TableViewCellWithAutoLayout/issues/3 for more info.
-    [self.bodyLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel withOffset:kLabelVerticalInsets relation:NSLayoutRelationGreaterThanOrEqual];
+    [self.bodyLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel withOffset:kLabelVerticalInsets];
     
     [UIView autoSetPriority:UILayoutPriorityRequired forConstraints:^{
         [self.bodyLabel autoSetContentCompressionResistancePriorityForAxis:ALAxisVertical];
@@ -101,20 +96,6 @@
     [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:kLabelVerticalInsets];
     
     self.didSetupConstraints = YES;
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-    // Make sure the contentView does a layout pass here so that its subviews have their frames set, which we
-    // need to use to set the preferredMaxLayoutWidth below.
-    [self.contentView setNeedsLayout];
-    [self.contentView layoutIfNeeded];
-    
-    // Set the preferredMaxLayoutWidth of the mutli-line bodyLabel based on the evaluated width of the label's frame,
-    // as this will allow the text to wrap correctly, and as a result allow the label to take on the correct height.
-    self.bodyLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.bodyLabel.frame);
 }
 
 - (void)updateFonts
