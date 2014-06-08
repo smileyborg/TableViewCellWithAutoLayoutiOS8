@@ -1,7 +1,14 @@
 TableViewCellWithAutoLayoutiOS8
 ===========================
 
-Sample project demonstrating self-sizing table view cells in iOS 8, using Auto Layout in UITableViewCell to achieve dynamic layouts with variable row heights. This project requires Xcode 6 and iOS 8, and is a universal app that will run on iPhone and iPad.
+*Note: This sample project requires __Xcode 6__ and __iOS 8__. For a sample project demonstrating the iOS 7 compatible implementation, [click here](https://github.com/smileyborg/TableViewCellWithAutoLayout).*
+
+Sample project demonstrating self-sizing table view cells in iOS 8, using Auto Layout in UITableViewCell to achieve dynamic layouts with variable row heights. This project is a universal app that will run on iPhone and iPad. This implementation is only compatible with iOS 8 and later.
+
+There are two branches in this repository:
+
+1. **[master](https://github.com/smileyborg/TableViewCellWithAutoLayoutiOS8/tree/master)** - A Swift implementation
+2. **objective-c** - An Objective-C implementation
 
 This sample project displays a table view with cells that each contain a single-line title label and a multi-line body label (each cell's body label displays a random number of lorem ipsum words).
 
