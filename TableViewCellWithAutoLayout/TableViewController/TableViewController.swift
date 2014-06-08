@@ -104,9 +104,9 @@ class TableViewController : UITableViewController
         
         // Configure the cell for this indexPath
         cell.updateFonts()
-        let modelDictionary = model.dataArray[indexPath.row] as NSDictionary
-        cell.titleLabel.text = modelDictionary.valueForKey("title") as String
-        cell.bodyLabel.text = modelDictionary.valueForKey("body") as String
+        let modelItem = model.dataArray[indexPath.row]
+        cell.titleLabel.text = modelItem.title
+        cell.bodyLabel.text = modelItem.body
         
         // Make sure the constraints have been added to this cell, since it may have just been created from scratch
         cell.setNeedsUpdateConstraints()

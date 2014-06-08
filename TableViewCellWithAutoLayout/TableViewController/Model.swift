@@ -9,14 +9,15 @@ import Foundation
 
 class Model
 {
-    var dataArray: NSMutableArray = []
+    var dataArray: Array<(title:String, body:String)> = Array()
         
     func populate()
     {
         var fontFamilies = UIFont.familyNames()
+        
         for familyName: AnyObject in fontFamilies {
             if let familyNameString: String = familyName as? String {
-                dataArray.addObject(["title": familyNameString, "body": randomLoremIpsum()])
+                dataArray.append((title: familyNameString, body: randomLoremIpsum()))
             }
         }
     }
@@ -29,7 +30,7 @@ class Model
         let familyName: AnyObject = fontFamilies[r]
     
         if let familyNameString: String = familyName as? String {
-            dataArray.addObject(["title": familyNameString, "body": randomLoremIpsum()])
+            dataArray.append((title: familyNameString, body: randomLoremIpsum()))
         }
     }
     
