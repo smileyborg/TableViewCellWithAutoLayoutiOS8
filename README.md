@@ -8,7 +8,7 @@ Sample project demonstrating self-sizing table view cells in iOS 8, using Auto L
 There are two branches in this repository:
 
 1. **[master](https://github.com/smileyborg/TableViewCellWithAutoLayoutiOS8/tree/master)** - A Swift implementation
-2. **objective-c** - An Objective-C implementation
+2. **objective-c** (this branch) - An Objective-C implementation
 
 This sample project displays a table view with cells that each contain a single-line title label and a multi-line body label (each cell's body label displays a random number of lorem ipsum words).
 
