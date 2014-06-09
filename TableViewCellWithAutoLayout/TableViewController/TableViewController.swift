@@ -37,7 +37,7 @@ class TableViewController : UITableViewController
         
         // Select either a programatically created cell or a nib-based one.
         tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
-//        tableView.registerNib(UINib(nibName: "NibTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: kCellIdentifier)
+        // tableView.registerNib(UINib(nibName: "NibTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: kCellIdentifier)
         
         // Self-sizing table view cells in iOS 8 require that the rowHeight property of the table view be set to the constant UITableViewAutomaticDimension
         tableView.rowHeight = UITableViewAutomaticDimension
