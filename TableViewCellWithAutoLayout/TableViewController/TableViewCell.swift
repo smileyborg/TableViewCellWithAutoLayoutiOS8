@@ -49,9 +49,7 @@ class TableViewCell: UITableViewCell
     {
         super.updateConstraints()
         
-        if didSetupConstraints {
-            return
-        }
+        if didSetupConstraints { return }
         
         // Note: if the constraints you add below require a larger cell size than the current size (which is likely to be the default size {320, 44}), you'll get an exception.
         // As a fix, you can temporarily increase the size of the cell's contentView so that this does not occur using code similar to the line below.
@@ -59,7 +57,7 @@ class TableViewCell: UITableViewCell
         // contentView.bounds = CGRect(x: 0.0, y: 0.0, width: 99999.0, height: 99999.0)
         
         // Prevent the two UILabels from being compressed below their intrinsic content height
-        // FIXME 7-Jun-14 Xcode 6b1: Apple Bug Report Radar #17220525: The UILayoutPriority enum is not compatible with Swift yet!
+        // FIXME 7-Jun-14 Xcode 6b1: Apple Bug Report rdar://17220525: The UILayoutPriority enum is not compatible with Swift yet!
         // As a temporary workaround, we're using the raw value of UILayoutPriorityRequired = 1000
         UIView.autoSetPriority(1000) {
             self.titleLabel.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
