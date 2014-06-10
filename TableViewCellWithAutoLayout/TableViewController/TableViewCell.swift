@@ -9,8 +9,10 @@ import UIKit
 
 class TableViewCell: UITableViewCell
 {
-    let kLabelHorizontalInsets = 15.0
-    let kLabelVerticalInsets = 10.0
+    // The CGFloat type annotation is necessary for these constants because they are passed as arguments to bridged Objective-C methods,
+    // and without making the type explicit these will be inferred to be type Double which is not compatible.
+    let kLabelHorizontalInsets: CGFloat = 15.0
+    let kLabelVerticalInsets: CGFloat = 10.0
     
     var didSetupConstraints = false
     
@@ -64,19 +66,16 @@ class TableViewCell: UITableViewCell
             self.bodyLabel.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
         }
         
-        // FIXME 7-Jun-14 Xcode 6b1: The Double literals below should refer to the defined constants kLabelHorizontalInsets and kLabelVerticalInsets.
-        // However, there are currently intermittent compiler failures when the literals are replaced with these constants. For example, 'Could not find member .Top'
-        
-        titleLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: 10.0)
-        titleLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: 15.0)
-        titleLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 15.0)
+        titleLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: kLabelVerticalInsets)
+        titleLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: kLabelHorizontalInsets)
+        titleLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: kLabelHorizontalInsets)
         
         // This constraint is an inequality so that if the cell is slightly taller than actually required, extra space will go here
         bodyLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: titleLabel, withOffset: 10.0, relation: .GreaterThanOrEqual)
         
-        bodyLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: 15.0)
-        bodyLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 15.0)
-        bodyLabel.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 10.0)
+        bodyLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: kLabelHorizontalInsets)
+        bodyLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: kLabelHorizontalInsets)
+        bodyLabel.autoPinEdgeToSuperviewEdge(.Bottom, withInset: kLabelVerticalInsets)
         
         didSetupConstraints = true
     }
