@@ -38,7 +38,7 @@ class TableViewCell: UITableViewCell
         contentView.addSubview(titleLabel)
         contentView.addSubview(bodyLabel)
         
-        contentView.backgroundColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.1) // light red
+        contentView.backgroundColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.1) // light green
         
         updateFonts()
     }
