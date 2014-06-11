@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TableViewController : UITableViewController
+class TableViewController: UITableViewController
 {
     let kCellIdentifier = "CellIdentifier"
     
@@ -35,7 +35,18 @@ class TableViewController : UITableViewController
         
         tableView.allowsSelection = false
         
-        tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        
+        
+        /******************************************************************
+        SWITCH BETWEEN PROGRAMMATIC AND INTERFACE BUILDER LOADED CELLS
+        
+        Uncomment ONE of the two lines below to switch between approaches.
+        Make sure that the other line commented out - don't uncomment both!
+        *******************************************************************/
+        tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: kCellIdentifier) // uncomment this line to load table view cells programmatically
+//        tableView.registerNib(UINib(nibName: "NibTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: kCellIdentifier) // uncomment this line to load table view cells from IB
+        
+        
         
         // Self-sizing table view cells in iOS 8 require that the rowHeight property of the table view be set to the constant UITableViewAutomaticDimension
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -100,19 +111,37 @@ class TableViewController : UITableViewController
     
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
     {
-        let cell: TableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as TableViewCell
+        // This will be the case for programmatically loaded cells (see viewDidLoad to switch approaches)
+        if let cell: TableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as? TableViewCell {
+            // Configure the cell for this indexPath
+            cell.updateFonts()
+            let modelItem = model.dataArray[indexPath.row]
+            cell.titleLabel.text = modelItem.title
+            cell.bodyLabel.text = modelItem.body
+            
+            // Make sure the constraints have been added to this cell, since it may have just been created from scratch
+            cell.setNeedsUpdateConstraints()
+            cell.updateConstraintsIfNeeded()
+            
+            return cell
+        }
         
-        // Configure the cell for this indexPath
-        cell.updateFonts()
-        let modelItem = model.dataArray[indexPath.row]
-        cell.titleLabel.text = modelItem.title
-        cell.bodyLabel.text = modelItem.body
+        // This will be the case for interface builder loaded cells (see viewDidLoad to switch approaches)
+        if let cell: NibTableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as? NibTableViewCell {
+            // Configure the cell for this indexPath
+            cell.updateFonts()
+            let modelItem = model.dataArray[indexPath.row]
+            cell.titleLabel.text = modelItem.title
+            cell.bodyLabel.text = modelItem.body
+            
+            // Make sure the constraints have been added to this cell, since it may have just been created from scratch
+            cell.setNeedsUpdateConstraints()
+            cell.updateConstraintsIfNeeded()
+            
+            return cell
+        }
         
-        // Make sure the constraints have been added to this cell, since it may have just been created from scratch
-        cell.setNeedsUpdateConstraints()
-        cell.updateConstraintsIfNeeded()
-                
-        return cell
+        return nil
     }
     
     /*

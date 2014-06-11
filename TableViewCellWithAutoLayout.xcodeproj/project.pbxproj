@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A3B25361945F89500838EF4 /* NibTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3B25351945F89500838EF4 /* NibTableViewCell.swift */; };
+		5A3B25381945F8AC00838EF4 /* NibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A3B25371945F8AC00838EF4 /* NibTableViewCell.xib */; };
 		99BCDCA518008C0000B8E66B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BCDCA418008C0000B8E66B /* Foundation.framework */; };
 		99BCDCA718008C0000B8E66B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BCDCA618008C0000B8E66B /* CoreGraphics.framework */; };
 		99BCDCA918008C0000B8E66B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BCDCA818008C0000B8E66B /* UIKit.framework */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A3B25351945F89500838EF4 /* NibTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibTableViewCell.swift; sourceTree = "<group>"; };
+		5A3B25371945F8AC00838EF4 /* NibTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibTableViewCell.xib; sourceTree = "<group>"; };
 		99BCDCA118008C0000B8E66B /* TableViewCellWithAutoLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewCellWithAutoLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99BCDCA418008C0000B8E66B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		99BCDCA618008C0000B8E66B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -156,10 +160,28 @@
 			children = (
 				A7C103201943F73C006A9720 /* TableViewCellWithAutoLayout-Bridging-Header.h */,
 				A7F5DDAB19440B7B008E238B /* Model.swift */,
-				A7C103211943F73D006A9720 /* TableViewCell.swift */,
 				A7F5DDAD194417DC008E238B /* TableViewController.swift */,
+				B13F6E9E1947D6DE00FF3B42 /* Programmatic */,
+				B13F6E9F1947D6EB00FF3B42 /* Interface Builder */,
 			);
 			path = TableViewController;
+			sourceTree = "<group>";
+		};
+		B13F6E9E1947D6DE00FF3B42 /* Programmatic */ = {
+			isa = PBXGroup;
+			children = (
+				A7C103211943F73D006A9720 /* TableViewCell.swift */,
+			);
+			name = Programmatic;
+			sourceTree = "<group>";
+		};
+		B13F6E9F1947D6EB00FF3B42 /* Interface Builder */ = {
+			isa = PBXGroup;
+			children = (
+				5A3B25351945F89500838EF4 /* NibTableViewCell.swift */,
+				5A3B25371945F8AC00838EF4 /* NibTableViewCell.xib */,
+			);
+			name = "Interface Builder";
 			sourceTree = "<group>";
 		};
 		B147F1811867A715002B0C25 /* UIView+AutoLayout */ = {
@@ -216,7 +238,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = RJ;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = RobotJackalope;
 				TargetAttributes = {
 					99BCDCBB18008C0000B8E66B = {
@@ -248,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99BCDCAF18008C0000B8E66B /* InfoPlist.strings in Resources */,
+				5A3B25381945F8AC00838EF4 /* NibTableViewCell.xib in Resources */,
 				99BCDCB718008C0000B8E66B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B147F1841867A715002B0C25 /* UIView+AutoLayout.m in Sources */,
+				5A3B25361945F89500838EF4 /* NibTableViewCell.swift in Sources */,
 				A7F5DDAE194417DC008E238B /* TableViewController.swift in Sources */,
 				A7F5DDAA194408D9008E238B /* AppDelegate.swift in Sources */,
 				A7F5DDAC19440B7B008E238B /* Model.swift in Sources */,
@@ -317,7 +341,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -357,7 +380,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -425,7 +447,6 @@
 		99BCDCD118008C0000B8E66B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TableViewCellWithAutoLayout.app/TableViewCellWithAutoLayout";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -448,7 +469,6 @@
 		99BCDCD218008C0000B8E66B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TableViewCellWithAutoLayout.app/TableViewCellWithAutoLayout";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
