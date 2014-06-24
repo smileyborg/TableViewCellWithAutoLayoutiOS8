@@ -23,7 +23,9 @@
 		A7F5DDAA194408D9008E238B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5DDA9194408D9008E238B /* AppDelegate.swift */; };
 		A7F5DDAC19440B7B008E238B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5DDAB19440B7B008E238B /* Model.swift */; };
 		A7F5DDAE194417DC008E238B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5DDAD194417DC008E238B /* TableViewController.swift */; };
-		B147F1841867A715002B0C25 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B147F1831867A715002B0C25 /* UIView+AutoLayout.m */; };
+		B126BA121959EF4E0018DBAE /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B126BA0A1959EF4E0018DBAE /* ALView+PureLayout.m */; };
+		B126BA131959EF4E0018DBAE /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B126BA0C1959EF4E0018DBAE /* NSArray+PureLayout.m */; };
+		B126BA141959EF4E0018DBAE /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B126BA0E1959EF4E0018DBAE /* NSLayoutConstraint+PureLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +59,15 @@
 		A7F5DDA9194408D9008E238B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7F5DDAB19440B7B008E238B /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		A7F5DDAD194417DC008E238B /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		B147F1821867A715002B0C25 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
-		B147F1831867A715002B0C25 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		B126BA091959EF4E0018DBAE /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
+		B126BA0A1959EF4E0018DBAE /* ALView+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALView+PureLayout.m"; sourceTree = "<group>"; };
+		B126BA0B1959EF4E0018DBAE /* NSArray+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PureLayout.h"; sourceTree = "<group>"; };
+		B126BA0C1959EF4E0018DBAE /* NSArray+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PureLayout.m"; sourceTree = "<group>"; };
+		B126BA0D1959EF4E0018DBAE /* NSLayoutConstraint+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+PureLayout.h"; sourceTree = "<group>"; };
+		B126BA0E1959EF4E0018DBAE /* NSLayoutConstraint+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+PureLayout.m"; sourceTree = "<group>"; };
+		B126BA0F1959EF4E0018DBAE /* PureLayout+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PureLayout+Internal.h"; sourceTree = "<group>"; };
+		B126BA101959EF4E0018DBAE /* PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayout.h; sourceTree = "<group>"; };
+		B126BA111959EF4E0018DBAE /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayoutDefines.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +127,7 @@
 		99BCDCAA18008C0000B8E66B /* TableViewCellWithAutoLayout */ = {
 			isa = PBXGroup;
 			children = (
-				B147F1811867A715002B0C25 /* UIView+AutoLayout */,
+				B126BA081959EF4E0018DBAE /* PureLayout */,
 				A7F5DDA9194408D9008E238B /* AppDelegate.swift */,
 				99BCDCB618008C0000B8E66B /* Images.xcassets */,
 				99BCDCD318008C1700B8E66B /* TableViewController */,
@@ -167,6 +176,22 @@
 			path = TableViewController;
 			sourceTree = "<group>";
 		};
+		B126BA081959EF4E0018DBAE /* PureLayout */ = {
+			isa = PBXGroup;
+			children = (
+				B126BA091959EF4E0018DBAE /* ALView+PureLayout.h */,
+				B126BA0A1959EF4E0018DBAE /* ALView+PureLayout.m */,
+				B126BA0B1959EF4E0018DBAE /* NSArray+PureLayout.h */,
+				B126BA0C1959EF4E0018DBAE /* NSArray+PureLayout.m */,
+				B126BA0D1959EF4E0018DBAE /* NSLayoutConstraint+PureLayout.h */,
+				B126BA0E1959EF4E0018DBAE /* NSLayoutConstraint+PureLayout.m */,
+				B126BA0F1959EF4E0018DBAE /* PureLayout+Internal.h */,
+				B126BA101959EF4E0018DBAE /* PureLayout.h */,
+				B126BA111959EF4E0018DBAE /* PureLayoutDefines.h */,
+			);
+			path = PureLayout;
+			sourceTree = "<group>";
+		};
 		B13F6E9E1947D6DE00FF3B42 /* Programmatic */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,15 +207,6 @@
 				5A3B25371945F8AC00838EF4 /* NibTableViewCell.xib */,
 			);
 			name = "Interface Builder";
-			sourceTree = "<group>";
-		};
-		B147F1811867A715002B0C25 /* UIView+AutoLayout */ = {
-			isa = PBXGroup;
-			children = (
-				B147F1821867A715002B0C25 /* UIView+AutoLayout.h */,
-				B147F1831867A715002B0C25 /* UIView+AutoLayout.m */,
-			);
-			path = "UIView+AutoLayout";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,9 +306,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B147F1841867A715002B0C25 /* UIView+AutoLayout.m in Sources */,
 				5A3B25361945F89500838EF4 /* NibTableViewCell.swift in Sources */,
 				A7F5DDAE194417DC008E238B /* TableViewController.swift in Sources */,
+				B126BA121959EF4E0018DBAE /* ALView+PureLayout.m in Sources */,
+				B126BA131959EF4E0018DBAE /* NSArray+PureLayout.m in Sources */,
+				B126BA141959EF4E0018DBAE /* NSLayoutConstraint+PureLayout.m in Sources */,
 				A7F5DDAA194408D9008E238B /* AppDelegate.swift in Sources */,
 				A7F5DDAC19440B7B008E238B /* Model.swift in Sources */,
 				A7C103221943F73D006A9720 /* TableViewCell.swift in Sources */,
