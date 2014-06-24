@@ -22,7 +22,9 @@
 		99BCDCDA18008C1700B8E66B /* RJModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCD518008C1700B8E66B /* RJModel.m */; };
 		99BCDCDB18008C1700B8E66B /* RJTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCD718008C1700B8E66B /* RJTableViewCell.m */; };
 		99BCDCDC18008C1700B8E66B /* RJTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99BCDCD918008C1700B8E66B /* RJTableViewController.m */; };
-		B147F1841867A715002B0C25 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B147F1831867A715002B0C25 /* UIView+AutoLayout.m */; };
+		B1FEE7341959E980001C113F /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FEE72C1959E980001C113F /* ALView+PureLayout.m */; };
+		B1FEE7351959E980001C113F /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FEE72E1959E980001C113F /* NSArray+PureLayout.m */; };
+		B1FEE7361959E980001C113F /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FEE7301959E980001C113F /* NSLayoutConstraint+PureLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +60,15 @@
 		99BCDCD718008C1700B8E66B /* RJTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJTableViewCell.m; sourceTree = "<group>"; };
 		99BCDCD818008C1700B8E66B /* RJTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJTableViewController.h; sourceTree = "<group>"; };
 		99BCDCD918008C1700B8E66B /* RJTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJTableViewController.m; sourceTree = "<group>"; };
-		B147F1821867A715002B0C25 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
-		B147F1831867A715002B0C25 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		B1FEE72B1959E980001C113F /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
+		B1FEE72C1959E980001C113F /* ALView+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALView+PureLayout.m"; sourceTree = "<group>"; };
+		B1FEE72D1959E980001C113F /* NSArray+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PureLayout.h"; sourceTree = "<group>"; };
+		B1FEE72E1959E980001C113F /* NSArray+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PureLayout.m"; sourceTree = "<group>"; };
+		B1FEE72F1959E980001C113F /* NSLayoutConstraint+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+PureLayout.h"; sourceTree = "<group>"; };
+		B1FEE7301959E980001C113F /* NSLayoutConstraint+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+PureLayout.m"; sourceTree = "<group>"; };
+		B1FEE7311959E980001C113F /* PureLayout+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PureLayout+Internal.h"; sourceTree = "<group>"; };
+		B1FEE7321959E980001C113F /* PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayout.h; sourceTree = "<group>"; };
+		B1FEE7331959E980001C113F /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayoutDefines.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +98,7 @@
 		99BCDC9818008C0000B8E66B = {
 			isa = PBXGroup;
 			children = (
+				B1FEE72A1959E980001C113F /* PureLayout */,
 				99BCDCAA18008C0000B8E66B /* TableViewCellWithAutoLayout */,
 				99BCDCC318008C0000B8E66B /* TableViewCellWithAutoLayoutTests */,
 				99BCDCA318008C0000B8E66B /* Frameworks */,
@@ -119,7 +129,6 @@
 		99BCDCAA18008C0000B8E66B /* TableViewCellWithAutoLayout */ = {
 			isa = PBXGroup;
 			children = (
-				B147F1811867A715002B0C25 /* UIView+AutoLayout */,
 				99BCDCB318008C0000B8E66B /* RJAppDelegate.h */,
 				99BCDCB418008C0000B8E66B /* RJAppDelegate.m */,
 				99BCDCB618008C0000B8E66B /* Images.xcassets */,
@@ -171,13 +180,21 @@
 			path = TableViewController;
 			sourceTree = "<group>";
 		};
-		B147F1811867A715002B0C25 /* UIView+AutoLayout */ = {
+		B1FEE72A1959E980001C113F /* PureLayout */ = {
 			isa = PBXGroup;
 			children = (
-				B147F1821867A715002B0C25 /* UIView+AutoLayout.h */,
-				B147F1831867A715002B0C25 /* UIView+AutoLayout.m */,
+				B1FEE72B1959E980001C113F /* ALView+PureLayout.h */,
+				B1FEE72C1959E980001C113F /* ALView+PureLayout.m */,
+				B1FEE72D1959E980001C113F /* NSArray+PureLayout.h */,
+				B1FEE72E1959E980001C113F /* NSArray+PureLayout.m */,
+				B1FEE72F1959E980001C113F /* NSLayoutConstraint+PureLayout.h */,
+				B1FEE7301959E980001C113F /* NSLayoutConstraint+PureLayout.m */,
+				B1FEE7311959E980001C113F /* PureLayout+Internal.h */,
+				B1FEE7321959E980001C113F /* PureLayout.h */,
+				B1FEE7331959E980001C113F /* PureLayoutDefines.h */,
 			);
-			path = "UIView+AutoLayout";
+			name = PureLayout;
+			path = TableViewCellWithAutoLayout/PureLayout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,8 +294,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				99BCDCB518008C0000B8E66B /* RJAppDelegate.m in Sources */,
-				B147F1841867A715002B0C25 /* UIView+AutoLayout.m in Sources */,
+				B1FEE7341959E980001C113F /* ALView+PureLayout.m in Sources */,
 				99BCDCDC18008C1700B8E66B /* RJTableViewController.m in Sources */,
+				B1FEE7361959E980001C113F /* NSLayoutConstraint+PureLayout.m in Sources */,
+				B1FEE7351959E980001C113F /* NSArray+PureLayout.m in Sources */,
 				99BCDCB118008C0000B8E66B /* main.m in Sources */,
 				99BCDCDA18008C1700B8E66B /* RJModel.m in Sources */,
 				99BCDCDB18008C1700B8E66B /* RJTableViewCell.m in Sources */,

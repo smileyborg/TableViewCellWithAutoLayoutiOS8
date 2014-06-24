@@ -1,10 +1,10 @@
 //
-//  UIView+AutoLayout.h
-//  v2.0.0
-//  https://github.com/smileyborg/UIView-AutoLayout
+//  ALView+PureLayout.h
+//  v1.0.0
+//  https://github.com/smileyborg/PureLayout
 //
 //  Copyright (c) 2012 Richard Turton
-//  Copyright (c) 2013 Tyler Fox
+//  Copyright (c) 2013-2014 Tyler Fox
 //
 //  This code is distributed under the terms and conditions of the MIT license.
 //
@@ -27,39 +27,15 @@
 //  IN THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-
-#pragma mark ALAttributes
-
-typedef NS_ENUM(NSInteger, ALEdge) {
-    ALEdgeLeft = NSLayoutAttributeLeft,             // the left edge of the view
-    ALEdgeRight = NSLayoutAttributeRight,           // the right edge of the view
-    ALEdgeTop = NSLayoutAttributeTop,               // the top edge of the view
-    ALEdgeBottom = NSLayoutAttributeBottom,         // the bottom edge of the view
-    ALEdgeLeading = NSLayoutAttributeLeading,       // the leading edge of the view (left edge for left-to-right languages like English, right edge for right-to-left languages like Arabic)
-    ALEdgeTrailing = NSLayoutAttributeTrailing      // the trailing edge of the view (right edge for left-to-right languages like English, left edge for right-to-left languages like Arabic)
-};
-
-typedef NS_ENUM(NSInteger, ALDimension) {
-    ALDimensionWidth = NSLayoutAttributeWidth,      // the width of the view
-    ALDimensionHeight = NSLayoutAttributeHeight     // the height of the view
-};
-
-typedef NS_ENUM(NSInteger, ALAxis) {
-    ALAxisVertical = NSLayoutAttributeCenterX,      // a vertical line through the center of the view
-    ALAxisHorizontal = NSLayoutAttributeCenterY,    // a horizontal line through the center of the view
-    ALAxisBaseline = NSLayoutAttributeBaseline      // a horizontal line at the text baseline (not applicable to all views)
-};
-
-typedef void(^ALConstraintsBlock)(void);    // a block of method calls to the UIView+AutoLayout category API
+#import "PureLayoutDefines.h"
 
 
-#pragma mark - UIView+AutoLayout
+#pragma mark - ALView+PureLayout
 
 /**
- A category on UIView that provides a simple yet powerful interface for creating Auto Layout constraints.
+ A category on UIView/NSView that provides a simple yet powerful interface for creating Auto Layout constraints.
  */
-@interface UIView (AutoLayout)
+@interface ALView (PureLayout)
 
 
 #pragma mark Factory & Initializer Methods
@@ -73,9 +49,9 @@ typedef void(^ALConstraintsBlock)(void);    // a block of method calls to the UI
 
 #pragma mark Set Constraint Priority
 
-/** Sets the constraint priority to the given value for all constraints created using the UIView+AutoLayout category API within the given constraints block.
+/** Sets the constraint priority to the given value for all constraints created using the PureLayout API within the given constraints block.
     NOTE: This method will have no effect (and will NOT set the priority) on constraints created or added using the SDK directly within the block! */
-+ (void)autoSetPriority:(UILayoutPriority)priority forConstraints:(ALConstraintsBlock)block;
++ (void)autoSetPriority:(ALLayoutPriority)priority forConstraints:(ALConstraintsBlock)block;
 
 
 #pragma mark Remove Constraints
@@ -125,49 +101,49 @@ typedef void(^ALConstraintsBlock)(void);    // a block of method calls to the UI
 - (NSLayoutConstraint *)autoPinEdgeToSuperviewEdge:(ALEdge)edge withInset:(CGFloat)inset relation:(NSLayoutRelation)relation;
 
 /** Pins the edges of the view to the edges of its superview with the given edge insets. */
-- (NSArray *)autoPinEdgesToSuperviewEdgesWithInsets:(UIEdgeInsets)insets;
+- (NSArray *)autoPinEdgesToSuperviewEdgesWithInsets:(ALEdgeInsets)insets;
 
 /** Pins 3 of the 4 edges of the view to the edges of its superview with the given edge insets, excluding one edge. */
-- (NSArray *)autoPinEdgesToSuperviewEdgesWithInsets:(UIEdgeInsets)insets excludingEdge:(ALEdge)edge;
+- (NSArray *)autoPinEdgesToSuperviewEdgesWithInsets:(ALEdgeInsets)insets excludingEdge:(ALEdge)edge;
 
 
 #pragma mark Pin Edges
 
 /** Pins an edge of the view to a given edge of another view. */
-- (NSLayoutConstraint *)autoPinEdge:(ALEdge)edge toEdge:(ALEdge)toEdge ofView:(UIView *)peerView;
+- (NSLayoutConstraint *)autoPinEdge:(ALEdge)edge toEdge:(ALEdge)toEdge ofView:(ALView *)peerView;
 
 /** Pins an edge of the view to a given edge of another view with an offset. */
-- (NSLayoutConstraint *)autoPinEdge:(ALEdge)edge toEdge:(ALEdge)toEdge ofView:(UIView *)peerView withOffset:(CGFloat)offset;
+- (NSLayoutConstraint *)autoPinEdge:(ALEdge)edge toEdge:(ALEdge)toEdge ofView:(ALView *)peerView withOffset:(CGFloat)offset;
 
 /** Pins an edge of the view to a given edge of another view with an offset as a maximum or minimum. */
-- (NSLayoutConstraint *)autoPinEdge:(ALEdge)edge toEdge:(ALEdge)toEdge ofView:(UIView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation;
+- (NSLayoutConstraint *)autoPinEdge:(ALEdge)edge toEdge:(ALEdge)toEdge ofView:(ALView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation;
 
 
 #pragma mark Align Axes
 
 /** Aligns an axis of the view to the same axis of another view. */
-- (NSLayoutConstraint *)autoAlignAxis:(ALAxis)axis toSameAxisOfView:(UIView *)peerView;
+- (NSLayoutConstraint *)autoAlignAxis:(ALAxis)axis toSameAxisOfView:(ALView *)peerView;
 
 /** Aligns an axis of the view to the same axis of another view with an offset. */
-- (NSLayoutConstraint *)autoAlignAxis:(ALAxis)axis toSameAxisOfView:(UIView *)peerView withOffset:(CGFloat)offset;
+- (NSLayoutConstraint *)autoAlignAxis:(ALAxis)axis toSameAxisOfView:(ALView *)peerView withOffset:(CGFloat)offset;
 
 
 #pragma mark Match Dimensions
 
 /** Matches a dimension of the view to a given dimension of another view. */
-- (NSLayoutConstraint *)autoMatchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView;
+- (NSLayoutConstraint *)autoMatchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(ALView *)peerView;
 
 /** Matches a dimension of the view to a given dimension of another view with an offset. */
-- (NSLayoutConstraint *)autoMatchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView withOffset:(CGFloat)offset;
+- (NSLayoutConstraint *)autoMatchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(ALView *)peerView withOffset:(CGFloat)offset;
 
 /** Matches a dimension of the view to a given dimension of another view with an offset as a maximum or minimum. */
-- (NSLayoutConstraint *)autoMatchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation;
+- (NSLayoutConstraint *)autoMatchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(ALView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation;
 
 /** Matches a dimension of the view to a multiple of a given dimension of another view. */
-- (NSLayoutConstraint *)autoMatchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier;
+- (NSLayoutConstraint *)autoMatchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(ALView *)peerView withMultiplier:(CGFloat)multiplier;
 
 /** Matches a dimension of the view to a multiple of a given dimension of another view as a maximum or minimum. */
-- (NSLayoutConstraint *)autoMatchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier relation:(NSLayoutRelation)relation;
+- (NSLayoutConstraint *)autoMatchDimension:(ALDimension)dimension toDimension:(ALDimension)toDimension ofView:(ALView *)peerView withMultiplier:(CGFloat)multiplier relation:(NSLayoutRelation)relation;
 
 
 #pragma mark Set Dimensions
@@ -185,33 +161,35 @@ typedef void(^ALConstraintsBlock)(void);    // a block of method calls to the UI
 #pragma mark Set Content Compression Resistance & Hugging
 
 /** Sets the priority of content compression resistance for an axis.
-    NOTE: This method must only be called from within the block passed into the method +[UIView autoSetPriority:forConstraints:] */
+    NOTE: This method must only be called from within the block passed into the method +[autoSetPriority:forConstraints:] */
 - (void)autoSetContentCompressionResistancePriorityForAxis:(ALAxis)axis;
 
 /** Sets the priority of content hugging for an axis.
-    NOTE: This method must only be called from within the block passed into the method +[UIView autoSetPriority:forConstraints:] */
+    NOTE: This method must only be called from within the block passed into the method +[autoSetPriority:forConstraints:] */
 - (void)autoSetContentHuggingPriorityForAxis:(ALAxis)axis;
 
 
 #pragma mark Constrain Any Attributes
 
 /** Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view. */
-- (NSLayoutConstraint *)autoConstrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(UIView *)peerView;
+- (NSLayoutConstraint *)autoConstrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(ALView *)peerView;
 
 /** Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view with an offset. */
-- (NSLayoutConstraint *)autoConstrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(UIView *)peerView withOffset:(CGFloat)offset;
+- (NSLayoutConstraint *)autoConstrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(ALView *)peerView withOffset:(CGFloat)offset;
 
 /** Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view with an offset as a maximum or minimum. */
-- (NSLayoutConstraint *)autoConstrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(UIView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation;
+- (NSLayoutConstraint *)autoConstrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(ALView *)peerView withOffset:(CGFloat)offset relation:(NSLayoutRelation)relation;
 
 /** Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view with a multiplier. */
-- (NSLayoutConstraint *)autoConstrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier;
+- (NSLayoutConstraint *)autoConstrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(ALView *)peerView withMultiplier:(CGFloat)multiplier;
 
 /** Constrains an attribute (any ALEdge, ALAxis, or ALDimension) of the view to a given attribute of another view with a multiplier as a maximum or minimum. */
-- (NSLayoutConstraint *)autoConstrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(UIView *)peerView withMultiplier:(CGFloat)multiplier relation:(NSLayoutRelation)relation;
+- (NSLayoutConstraint *)autoConstrainAttribute:(NSInteger)attribute toAttribute:(NSInteger)toAttribute ofView:(ALView *)peerView withMultiplier:(CGFloat)multiplier relation:(NSLayoutRelation)relation;
 
 
-#pragma mark Pin to Layout Guides
+#pragma mark Pin to Layout Guides (iOS only)
+
+#if TARGET_OS_IPHONE
 
 /** Pins the top edge of the view to the top layout guide of the given view controller with an inset. */
 - (NSLayoutConstraint *)autoPinToTopLayoutGuideOfViewController:(UIViewController *)viewController withInset:(CGFloat)inset;
@@ -219,60 +197,6 @@ typedef void(^ALConstraintsBlock)(void);    // a block of method calls to the UI
 /** Pins the bottom edge of the view to the bottom layout guide of the given view controller with an inset. */
 - (NSLayoutConstraint *)autoPinToBottomLayoutGuideOfViewController:(UIViewController *)viewController withInset:(CGFloat)inset;
 
-@end
-
-
-#pragma mark - NSArray+AutoLayout
-
-/**
- A category on NSArray that provides a simple yet powerful interface for applying constraints to groups of views.
- */
-@interface NSArray (AutoLayout)
-
-
-#pragma mark Constrain Multiple Views
-
-/** Aligns views in this array to one another along a given edge. */
-- (NSArray *)autoAlignViewsToEdge:(ALEdge)edge;
-
-/** Aligns views in this array to one another along a given axis. */
-- (NSArray *)autoAlignViewsToAxis:(ALAxis)axis;
-
-/** Matches a given dimension of all the views in this array. */
-- (NSArray *)autoMatchViewsDimension:(ALDimension)dimension;
-
-/** Sets the given dimension of all the views in this array to a given size. */
-- (NSArray *)autoSetViewsDimension:(ALDimension)dimension toSize:(CGFloat)size;
-
-
-#pragma mark Distribute Multiple Views
-
-/** Distributes the views in this array equally along the selected axis in their superview. Views will be the same size (variable) in the dimension along the axis and will have spacing (fixed) between them. */
-- (NSArray *)autoDistributeViewsAlongAxis:(ALAxis)axis withFixedSpacing:(CGFloat)spacing alignment:(NSLayoutFormatOptions)alignment;
-
-/** Distributes the views in this array equally along the selected axis in their superview. Views will be the same size (variable) in the dimension along the axis and will have spacing (fixed) between them, with optional insets from the first and last views to their superview. */
-- (NSArray *)autoDistributeViewsAlongAxis:(ALAxis)axis withFixedSpacing:(CGFloat)spacing insetSpacing:(BOOL)shouldSpaceInsets alignment:(NSLayoutFormatOptions)alignment;
-
-/** Distributes the views in this array equally along the selected axis in their superview. Views will be the same size (fixed) in the dimension along the axis and will have spacing (variable) between them. */
-- (NSArray *)autoDistributeViewsAlongAxis:(ALAxis)axis withFixedSize:(CGFloat)size alignment:(NSLayoutFormatOptions)alignment;
-
-/** Distributes the views in this array equally along the selected axis in their superview. Views will be the same size (fixed) in the dimension along the axis and will have spacing (variable) between them, with optional insets from the first and last views to their superview. */
-- (NSArray *)autoDistributeViewsAlongAxis:(ALAxis)axis withFixedSize:(CGFloat)size insetSpacing:(BOOL)shouldSpaceInsets alignment:(NSLayoutFormatOptions)alignment;
-
-@end
-
-
-#pragma mark - NSLayoutConstraint+AutoLayout
-
-/**
- A category on NSLayoutConstraint that allows constraints to be easily removed.
- */
-@interface NSLayoutConstraint (AutoLayout)
-
-/** Adds the constraint to the appropriate view. */
-- (void)autoInstall;
-
-/** Removes the constraint from the view it has been added to. */
-- (void)autoRemove;
+#endif /* TARGET_OS_IPHONE */
 
 @end
