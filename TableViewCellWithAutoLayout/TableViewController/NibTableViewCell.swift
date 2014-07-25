@@ -9,8 +9,8 @@ import UIKit
 
 class NibTableViewCell: UITableViewCell
 {
-    @IBOutlet var titleLabel: UILabel
-    @IBOutlet var bodyLabel: UILabel
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var bodyLabel: UILabel!
     
     override func awakeFromNib()
     {
