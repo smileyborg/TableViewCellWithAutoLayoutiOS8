@@ -42,7 +42,7 @@ class Model
         
         let minimumNumberOfWords = 3
         let r = max(minimumNumberOfWords, random() % loremIpsumArray.count) // get a random number r, where:  minimumNumberOfWords <= r <= loremIpsumArray.count
-        let loremIpsumRandom = loremIpsumArray[0..r] // grab a slice of the lorem ipsum array that contains r number of words
+        let loremIpsumRandom = loremIpsumArray[0..<r] // grab a slice of the lorem ipsum array that contains r number of words
         
         let loremIpsumText = loremIpsumRandom.reduce("") { "\($0) \($1)" } // join the array of words to make a string
         return "\(loremIpsumText)!!!" // append "!!!" so that we always know what the ending characters are
