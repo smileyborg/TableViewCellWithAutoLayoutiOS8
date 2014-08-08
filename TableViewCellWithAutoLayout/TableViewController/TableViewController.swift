@@ -13,14 +13,21 @@ class TableViewController: UITableViewController
     
     var model = Model()
     
-    init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!)
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!)
     {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    init(style: UITableViewStyle)
+    override init(style: UITableViewStyle)
     {
         super.init(style: style)
+        
+        model.populate()
+    }
+    
+    required init(coder aDecoder: NSCoder!)
+    {
+        super.init(coder: aDecoder)
         
         model.populate()
     }

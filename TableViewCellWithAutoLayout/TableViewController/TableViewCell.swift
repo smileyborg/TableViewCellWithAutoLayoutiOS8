@@ -16,33 +16,43 @@ class TableViewCell: UITableViewCell
     
     var didSetupConstraints = false
     
-    var titleLabel: UILabel
-    var bodyLabel: UILabel
+    var titleLabel: UILabel = UILabel.newAutoLayoutView()
+    var bodyLabel: UILabel = UILabel.newAutoLayoutView()
     
-    init(style: UITableViewCellStyle, reuseIdentifier: String!)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String!)
     {
-        titleLabel = UILabel.newAutoLayoutView()
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setupViews()
+    }
+    
+    required init(coder aDecoder: NSCoder!)
+    {
+        super.init(coder: aDecoder)
+        
+        setupViews()
+    }
+    
+    func setupViews()
+    {
         titleLabel.lineBreakMode = .ByTruncatingTail
         titleLabel.numberOfLines = 1
         titleLabel.textAlignment = .Left
         titleLabel.textColor = UIColor.blackColor()
         titleLabel.backgroundColor = UIColor(red: 0, green: 0, blue: 1, alpha: 0.1) // light blue
         
-        bodyLabel = UILabel.newAutoLayoutView()
         bodyLabel.lineBreakMode = .ByTruncatingTail
         bodyLabel.numberOfLines = 0
         bodyLabel.textAlignment = .Left
         bodyLabel.textColor = UIColor.darkGrayColor()
         bodyLabel.backgroundColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.1) // light red
         
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        updateFonts()
         
         contentView.addSubview(titleLabel)
         contentView.addSubview(bodyLabel)
         
         contentView.backgroundColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.1) // light green
-        
-        updateFonts()
     }
     
     override func updateConstraints()
