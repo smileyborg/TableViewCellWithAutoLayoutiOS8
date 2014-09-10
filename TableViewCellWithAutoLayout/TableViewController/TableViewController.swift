@@ -25,7 +25,7 @@ class TableViewController: UITableViewController
         model.populate()
     }
     
-    required init(coder aDecoder: NSCoder!)
+    required init(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)
         
@@ -50,8 +50,8 @@ class TableViewController: UITableViewController
         Uncomment ONE of the two lines below to switch between approaches.
         Make sure that the other line commented out - don't uncomment both!
         *******************************************************************/
-        tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: kCellIdentifier) // uncomment this line to load table view cells programmatically
-//        tableView.registerNib(UINib(nibName: "NibTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: kCellIdentifier) // uncomment this line to load table view cells from IB
+//        tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: kCellIdentifier) // uncomment this line to load table view cells programmatically
+        tableView.registerNib(UINib(nibName: "NibTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: kCellIdentifier) // uncomment this line to load table view cells from IB
         
         
         
@@ -106,17 +106,17 @@ class TableViewController: UITableViewController
         tableView.insertRowsAtIndexPaths([lastIndexPath], withRowAnimation: .Automatic)
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView!) -> Int
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
         return 1
     }
     
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return model.dataArray.count
     }
     
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell!
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         // This will be the case for programmatically loaded cells (see viewDidLoad to switch approaches)
         if let cell: TableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as? TableViewCell {
@@ -134,21 +134,20 @@ class TableViewController: UITableViewController
         }
         
         // This will be the case for interface builder loaded cells (see viewDidLoad to switch approaches)
-        if let cell: NibTableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as? NibTableViewCell {
-            // Configure the cell for this indexPath
-            cell.updateFonts()
-            let modelItem = model.dataArray[indexPath.row]
-            cell.titleLabel.text = modelItem.title
-            cell.bodyLabel.text = modelItem.body
-            
-            // Make sure the constraints have been added to this cell, since it may have just been created from scratch
-            cell.setNeedsUpdateConstraints()
-            cell.updateConstraintsIfNeeded()
-            
-            return cell
-        }
-        
-        return nil
+        let cell: NibTableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as NibTableViewCell
+
+				// Configure the cell for this indexPath
+				cell.updateFonts()
+				let modelItem = model.dataArray[indexPath.row]
+				cell.titleLabel.text = modelItem.title
+				cell.bodyLabel.text = modelItem.body
+				
+				// Make sure the constraints have been added to this cell, since it may have just been created from scratch
+				cell.setNeedsUpdateConstraints()
+				cell.updateConstraintsIfNeeded()
+				
+				return cell
+
     }
     
     /*
