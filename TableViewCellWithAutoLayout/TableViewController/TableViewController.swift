@@ -50,8 +50,8 @@ class TableViewController: UITableViewController
         Uncomment ONE of the two lines below to switch between approaches.
         Make sure that the other line commented out - don't uncomment both!
         *******************************************************************/
-//        tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: kCellIdentifier) // uncomment this line to load table view cells programmatically
-        tableView.registerNib(UINib(nibName: "NibTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: kCellIdentifier) // uncomment this line to load table view cells from IB
+        tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: kCellIdentifier) // uncomment this line to load table view cells programmatically
+//        tableView.registerNib(UINib(nibName: "NibTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: kCellIdentifier) // uncomment this line to load table view cells from IB
         
         
         
@@ -134,20 +134,22 @@ class TableViewController: UITableViewController
         }
         
         // This will be the case for interface builder loaded cells (see viewDidLoad to switch approaches)
-        let cell: NibTableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as NibTableViewCell
-
-				// Configure the cell for this indexPath
-				cell.updateFonts()
-				let modelItem = model.dataArray[indexPath.row]
-				cell.titleLabel.text = modelItem.title
-				cell.bodyLabel.text = modelItem.body
-				
-				// Make sure the constraints have been added to this cell, since it may have just been created from scratch
-				cell.setNeedsUpdateConstraints()
-				cell.updateConstraintsIfNeeded()
-				
-				return cell
-
+        if let cell: NibTableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as? NibTableViewCell {
+            // Configure the cell for this indexPath
+            cell.updateFonts()
+            let modelItem = model.dataArray[indexPath.row]
+            cell.titleLabel.text = modelItem.title
+            cell.bodyLabel.text = modelItem.body
+            
+            // Make sure the constraints have been added to this cell, since it may have just been created from scratch
+            cell.setNeedsUpdateConstraints()
+            cell.updateConstraintsIfNeeded()
+            
+            return cell
+        }
+        
+        assert(false, "The dequeued table view cell was of an unknown type!");
+        return UITableViewCell();
     }
     
     /*
