@@ -1,6 +1,6 @@
 //
 //  PureLayout+Internal.h
-//  v1.1.0
+//  v2.0.1
 //  https://github.com/smileyborg/PureLayout
 //
 //  Copyright (c) 2014 Tyler Fox
@@ -34,15 +34,14 @@
  */
 @interface ALView (PureLayoutInternal)
 
-+ (NSLayoutAttribute)al_attributeForEdge:(ALEdge)edge;
-+ (NSLayoutAttribute)al_attributeForAxis:(ALAxis)axis;
-+ (NSLayoutAttribute)al_attributeForDimension:(ALDimension)dimension;
-+ (NSLayoutAttribute)al_attributeForALAttribute:(NSInteger)ALAttribute;
-+ (ALLayoutConstraintAxis)al_constraintAxisForAxis:(ALAxis)axis;
-
-- (void)al_addConstraintUsingGlobalPriority:(NSLayoutConstraint *)constraint;
-- (ALView *)al_commonSuperviewWithView:(ALView *)peerView;
-- (NSLayoutConstraint *)al_alignToView:(ALView *)peerView withOption:(NSLayoutFormatOptions)alignment forAxis:(ALAxis)axis;
++ (BOOL)al_preventAutomaticConstraintInstallation;
++ (BOOL)al_isExecutingPriorityConstraintsBlock;
++ (ALLayoutPriority)al_currentGlobalConstraintPriority;
++ (NSString *)al_currentGlobalConstraintIdentifier;
++ (void)al_applyGlobalStateToConstraint:(NSLayoutConstraint *)constraint;
+- (void)al_addConstraint:(NSLayoutConstraint *)constraint;
+- (ALView *)al_commonSuperviewWithView:(ALView *)otherView;
+- (NSLayoutConstraint *)al_alignAttribute:(ALAttribute)attribute toView:(ALView *)otherView forAxis:(ALAxis)axis;
 
 @end
 
@@ -55,5 +54,20 @@
 - (ALView *)al_commonSuperviewOfViews;
 - (BOOL)al_containsMinimumNumberOfViews:(NSUInteger)minimumNumberOfViews;
 - (NSArray *)al_copyViewsOnly;
+
+@end
+
+
+/**
+ A category that exposes the internal (private) helper methods of the NSLayoutConstraint+PureLayout category.
+ */
+@interface NSLayoutConstraint (PureLayoutInternal)
+
++ (NSLayoutAttribute)al_layoutAttributeForAttribute:(ALAttribute)attribute;
++ (ALLayoutConstraintAxis)al_constraintAxisForAxis:(ALAxis)axis;
+#if __PureLayout_MinBaseSDK_iOS_8_0
++ (ALMargin)al_marginForEdge:(ALEdge)edge;
++ (ALMarginAxis)al_marginAxisForAxis:(ALAxis)axis;
+#endif /* __PureLayout_MinBaseSDK_iOS_8_0 */
 
 @end

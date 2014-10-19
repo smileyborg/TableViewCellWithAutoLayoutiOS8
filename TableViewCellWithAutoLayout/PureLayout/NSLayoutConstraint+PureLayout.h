@@ -1,6 +1,6 @@
 //
 //  NSLayoutConstraint+PureLayout.h
-//  v1.1.0
+//  v2.0.1
 //  https://github.com/smileyborg/PureLayout
 //
 //  Copyright (c) 2013-2014 Tyler Fox
@@ -32,14 +32,27 @@
 #pragma mark - NSLayoutConstraint+PureLayout
 
 /**
- A category on NSLayoutConstraint that allows constraints to be easily removed.
+ A category on NSLayoutConstraint that allows constraints to be easily installed & removed.
  */
 @interface NSLayoutConstraint (PureLayout)
 
-/** Adds the constraint to the appropriate view. */
+
+#pragma mark Install & Remove Constraints
+
+/** Activates the the constraint. */
 - (void)autoInstall;
 
-/** Removes the constraint from the view it has been added to. */
+/** Deactivates the constraint. */
 - (void)autoRemove;
+
+
+#pragma mark Identify Constraints
+
+#if __PureLayout_MinBaseSDK_iOS_8_0 || __PureLayout_MinBaseSDK_OSX_10_10
+
+/** Sets the string as the identifier for this constraint. Available in iOS 7.0 and OS X 10.9 and later. */
+- (instancetype)autoIdentify:(NSString *)identifer;
+
+#endif /* __PureLayout_MinBaseSDK_iOS_8_0 || __PureLayout_MinBaseSDK_OSX_10_10 */
 
 @end
