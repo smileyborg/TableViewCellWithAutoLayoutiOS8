@@ -18,7 +18,7 @@ class TableViewController: UITableViewController
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
-    override init?(style: UITableViewStyle)
+    override init(style: UITableViewStyle)
     {
         super.init(style: style)
         

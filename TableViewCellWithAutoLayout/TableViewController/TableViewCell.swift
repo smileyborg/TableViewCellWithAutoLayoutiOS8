@@ -19,7 +19,7 @@ class TableViewCell: UITableViewCell
     var titleLabel: UILabel = UILabel.newAutoLayoutView()
     var bodyLabel: UILabel = UILabel.newAutoLayoutView()
     
-    override init?(style: UITableViewCellStyle, reuseIdentifier: String!)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String!)
     {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
