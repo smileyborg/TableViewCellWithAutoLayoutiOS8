@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51D5DDDC1A648A5F00B1A5E4 /* AddNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D5DDD91A648A5F00B1A5E4 /* AddNewViewController.swift */; };
+		51D5DDDD1A648A5F00B1A5E4 /* AddNewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D5DDDA1A648A5F00B1A5E4 /* AddNewCell.swift */; };
+		51D5DDDE1A648A5F00B1A5E4 /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51D5DDDB1A648A5F00B1A5E4 /* star@2x.png */; };
 		5A3B25361945F89500838EF4 /* NibTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3B25351945F89500838EF4 /* NibTableViewCell.swift */; };
 		5A3B25381945F8AC00838EF4 /* NibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A3B25371945F8AC00838EF4 /* NibTableViewCell.xib */; };
 		99BCDCA518008C0000B8E66B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BCDCA418008C0000B8E66B /* Foundation.framework */; };
@@ -39,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		51D5DDD91A648A5F00B1A5E4 /* AddNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddNewViewController.swift; path = TableViewCellWithAutoLayout/CollectionViewController/AddNewViewController.swift; sourceTree = SOURCE_ROOT; };
+		51D5DDDA1A648A5F00B1A5E4 /* AddNewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddNewCell.swift; path = TableViewCellWithAutoLayout/CollectionViewController/AddNewCell.swift; sourceTree = SOURCE_ROOT; };
+		51D5DDDB1A648A5F00B1A5E4 /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star@2x.png"; path = "TableViewCellWithAutoLayout/CollectionViewController/star@2x.png"; sourceTree = SOURCE_ROOT; };
 		5A3B25351945F89500838EF4 /* NibTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibTableViewCell.swift; sourceTree = "<group>"; };
 		5A3B25371945F8AC00838EF4 /* NibTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibTableViewCell.xib; sourceTree = "<group>"; };
 		99BCDCA118008C0000B8E66B /* TableViewCellWithAutoLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewCellWithAutoLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +100,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		51D5DDD21A64898400B1A5E4 /* CollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				51D5DDD91A648A5F00B1A5E4 /* AddNewViewController.swift */,
+				51D5DDDA1A648A5F00B1A5E4 /* AddNewCell.swift */,
+				51D5DDDB1A648A5F00B1A5E4 /* star@2x.png */,
+			);
+			name = CollectionViewController;
+			path = TableViewController;
+			sourceTree = "<group>";
+		};
 		99BCDC9818008C0000B8E66B = {
 			isa = PBXGroup;
 			children = (
@@ -127,11 +144,12 @@
 		99BCDCAA18008C0000B8E66B /* TableViewCellWithAutoLayout */ = {
 			isa = PBXGroup;
 			children = (
-				B126BA081959EF4E0018DBAE /* PureLayout */,
 				A7F5DDA9194408D9008E238B /* AppDelegate.swift */,
 				99BCDCB618008C0000B8E66B /* Images.xcassets */,
-				99BCDCD318008C1700B8E66B /* TableViewController */,
+				B126BA081959EF4E0018DBAE /* PureLayout */,
 				99BCDCAB18008C0000B8E66B /* Supporting Files */,
+				51D5DDD21A64898400B1A5E4 /* CollectionViewController */,
+				99BCDCD318008C1700B8E66B /* TableViewController */,
 			);
 			path = TableViewCellWithAutoLayout;
 			sourceTree = "<group>";
@@ -287,6 +305,7 @@
 			files = (
 				99BCDCAF18008C0000B8E66B /* InfoPlist.strings in Resources */,
 				5A3B25381945F8AC00838EF4 /* NibTableViewCell.xib in Resources */,
+				51D5DDDE1A648A5F00B1A5E4 /* star@2x.png in Resources */,
 				99BCDCB718008C0000B8E66B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +326,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A3B25361945F89500838EF4 /* NibTableViewCell.swift in Sources */,
+				51D5DDDC1A648A5F00B1A5E4 /* AddNewViewController.swift in Sources */,
+				51D5DDDD1A648A5F00B1A5E4 /* AddNewCell.swift in Sources */,
 				A7F5DDAE194417DC008E238B /* TableViewController.swift in Sources */,
 				B126BA121959EF4E0018DBAE /* ALView+PureLayout.m in Sources */,
 				B126BA131959EF4E0018DBAE /* NSArray+PureLayout.m in Sources */,
