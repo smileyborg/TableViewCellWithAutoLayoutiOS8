@@ -13,11 +13,6 @@ class TableViewController: UITableViewController
     
     var model = Model()
     
-    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!)
-    {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
     override init(style: UITableViewStyle)
     {
         super.init(style: style)
@@ -94,7 +89,7 @@ class TableViewController: UITableViewController
         
         model = Model()
         
-        tableView.deleteRowsAtIndexPaths(rowsToDelete, withRowAnimation: .Automatic)
+        tableView.deleteRowsAtIndexPaths(rowsToDelete as [AnyObject], withRowAnimation: .Automatic)
     }
     
     // Adds a single row to the table view
