@@ -1,10 +1,10 @@
 //
 //  NSArray+PureLayout.m
-//  v2.0.1
+//  v2.0.5
 //  https://github.com/smileyborg/PureLayout
 //
 //  Copyright (c) 2012 Richard Turton
-//  Copyright (c) 2013-2014 Tyler Fox
+//  Copyright (c) 2013-2015 Tyler Fox
 //
 //  This code is distributed under the terms and conditions of the MIT license.
 //
@@ -45,6 +45,22 @@
  */
 - (void)autoInstallConstraints
 {
+#if __PureLayout_MinBaseSDK_iOS_8_0 || __PureLayout_MinBaseSDK_OSX_10_10
+    if ([NSLayoutConstraint respondsToSelector:@selector(activateConstraints:)]) {
+        for (id object in self) {
+            if ([object isKindOfClass:[NSLayoutConstraint class]]) {
+                [ALView al_applyGlobalStateToConstraint:object];
+            }
+        }
+        if ([ALView al_preventAutomaticConstraintInstallation]) {
+            [[ALView al_currentArrayOfCreatedConstraints] addObjectsFromArray:self];
+        } else {
+            [NSLayoutConstraint activateConstraints:self];
+        }
+        return;
+    }
+#endif /* __PureLayout_MinBaseSDK_iOS_8_0 || __PureLayout_MinBaseSDK_OSX_10_10 */
+    
     for (id object in self) {
         if ([object isKindOfClass:[NSLayoutConstraint class]]) {
             [((NSLayoutConstraint *)object) autoInstall];
@@ -57,6 +73,13 @@
  */
 - (void)autoRemoveConstraints
 {
+#if __PureLayout_MinBaseSDK_iOS_8_0 || __PureLayout_MinBaseSDK_OSX_10_10
+    if ([NSLayoutConstraint respondsToSelector:@selector(deactivateConstraints:)]) {
+        [NSLayoutConstraint deactivateConstraints:self];
+        return;
+    }
+#endif /* __PureLayout_MinBaseSDK_iOS_8_0 || __PureLayout_MinBaseSDK_OSX_10_10 */
+    
     for (id object in self) {
         if ([object isKindOfClass:[NSLayoutConstraint class]]) {
             [((NSLayoutConstraint *)object) autoRemove];
@@ -68,17 +91,17 @@
 
 /**
  Sets the string as the identifier for the constraints in this array. Available in iOS 7.0 and OS X 10.9 and later.
- The identifer will be printed along with each constraint's description.
+ The identifier will be printed along with each constraint's description.
  This is helpful to document the constraints' purpose and aid in debugging.
  
  @param identifier A string used to identify the constraints in this array.
  @return This array.
  */
-- (instancetype)autoIdentifyConstraints:(NSString *)identifer
+- (instancetype)autoIdentifyConstraints:(NSString *)identifier
 {
     for (id object in self) {
         if ([object isKindOfClass:[NSLayoutConstraint class]]) {
-            [((NSLayoutConstraint *)object) autoIdentify:identifer];
+            [((NSLayoutConstraint *)object) autoIdentify:identifier];
         }
     }
     return self;
@@ -93,7 +116,7 @@
  Aligns views in this array to one another along a given edge.
  Note: This array must contain at least 2 views, and all views must share a common superview.
  
- @param edge The edge to which the subviews will be aligned.
+ @param edge The edge to which the views will be aligned.
  @return An array of constraints added.
  */
 - (NSArray *)autoAlignViewsToEdge:(ALEdge)edge
@@ -118,7 +141,7 @@
  Aligns views in this array to one another along a given axis.
  Note: This array must contain at least 2 views, and all views must share a common superview.
  
- @param axis The axis to which to subviews will be aligned.
+ @param axis The axis to which the views will be aligned.
  @return An array of constraints added.
  */
 - (NSArray *)autoAlignViewsToAxis:(ALAxis)axis
@@ -143,7 +166,7 @@
  Matches a given dimension of all the views in this array.
  Note: This array must contain at least 2 views, and all views must share a common superview.
  
- @param dimension The dimension to match for all of the subviews.
+ @param dimension The dimension to match for all of the views.
  @return An array of constraints added.
  */
 - (NSArray *)autoMatchViewsDimension:(ALDimension)dimension
@@ -168,8 +191,8 @@
  Sets the given dimension of all the views in this array to a given size.
  Note: This array must contain at least 1 view.
  
- @param dimension The dimension of each of the subviews to set.
- @param size The size to set the given dimension of each subview to.
+ @param dimension The dimension of each of the views to set.
+ @param size The size to set the given dimension of each view to.
  @return An array of constraints added.
  */
 - (NSArray *)autoSetViewsDimension:(ALDimension)dimension toSize:(CGFloat)size
@@ -186,6 +209,21 @@
     return constraints;
 }
 
+/**
+ Sets all of the views in this array to a given size.
+ Note: This array must contain at least 1 view.
+ 
+ @param size The size to set each view's dimensions to.
+ @return An array of constraints added.
+ */
+- (NSArray *)autoSetViewsDimensionsToSize:(CGSize)size
+{
+    NSMutableArray *constraints = [NSMutableArray new];
+    [constraints addObjectsFromArray:[self autoSetViewsDimension:ALDimensionWidth toSize:size.width]];
+    [constraints addObjectsFromArray:[self autoSetViewsDimension:ALDimensionHeight toSize:size.height]];
+    return constraints;
+}
+
 
 /**
  Distributes the views in this array equally along the selected axis in their superview.
@@ -194,7 +232,7 @@
  
  @param axis The axis along which to distribute the views.
  @param alignment The attribute to use to align all the views to one another.
- @param spacing The fixed amount of spacing between each subview, before the first subview and after the last subview.
+ @param spacing The fixed amount of spacing between each view.
  @return An array of constraints added.
  */
 - (NSArray *)autoDistributeViewsAlongAxis:(ALAxis)axis
@@ -214,7 +252,7 @@
  
  @param axis The axis along which to distribute the views.
  @param alignment The attribute to use to align all the views to one another.
- @param spacing The fixed amount of spacing between each subview.
+ @param spacing The fixed amount of spacing between each view.
  @param shouldSpaceInsets Whether the first and last views should be equally inset from their superview.
  @return An array of constraints added.
  */
@@ -358,8 +396,17 @@
             NSAssert(nil, @"Not a valid ALAxis.");
             return nil;
     }
-    BOOL isRightToLeftLanguage = [NSLocale characterDirectionForLanguage:[[NSBundle mainBundle] preferredLocalizations][0]] == NSLocaleLanguageDirectionRightToLeft;
-    BOOL shouldFlipOrder = isRightToLeftLanguage && (axis != ALAxisVertical); // imitate the effect of leading/trailing when distributing horizontally
+#if TARGET_OS_IPHONE
+#   if !defined(PURELAYOUT_APP_EXTENSIONS)
+    BOOL isRightToLeftLayout = [[UIApplication sharedApplication] userInterfaceLayoutDirection] == UIUserInterfaceLayoutDirectionRightToLeft;
+#   else
+    // App Extensions may not access -[UIApplication sharedApplication]; fall back to checking the bundle's preferred localization character direction
+    BOOL isRightToLeftLayout = [NSLocale characterDirectionForLanguage:[[NSBundle mainBundle] preferredLocalizations][0]] == NSLocaleLanguageDirectionRightToLeft;
+#   endif /* !defined(PURELAYOUT_APP_EXTENSIONS) */
+#else
+    BOOL isRightToLeftLayout = [[NSApplication sharedApplication] userInterfaceLayoutDirection] == NSUserInterfaceLayoutDirectionRightToLeft;
+#endif /* TARGET_OS_IPHONE */
+    BOOL shouldFlipOrder = isRightToLeftLayout && (axis != ALAxisVertical); // imitate the effect of leading/trailing when distributing horizontally
     
     NSMutableArray *constraints = [NSMutableArray new];
     NSArray *views = [self al_copyViewsOnly];
@@ -377,6 +424,10 @@
         } else {
             multiplier = (i * 2.0) / (numberOfViews - 1.0);
             constant = (-multiplier + 1.0) * size / 2.0;
+        }
+        // If the multiplier is very close to 0, set it to the minimum value to prevent the second item in the constraint from being lost. Filed as rdar://19168380
+        if (fabs(multiplier) < kMULTIPLIER_MIN_VALUE) {
+            multiplier = kMULTIPLIER_MIN_VALUE;
         }
         NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:view attribute:attribute relatedBy:NSLayoutRelationEqual toItem:commonSuperview attribute:attribute multiplier:multiplier constant:constant];
         [constraint autoInstall];

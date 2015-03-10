@@ -1,9 +1,9 @@
 //
 //  NSLayoutConstraint+PureLayout.h
-//  v2.0.1
+//  v2.0.5
 //  https://github.com/smileyborg/PureLayout
 //
-//  Copyright (c) 2013-2014 Tyler Fox
+//  Copyright (c) 2013-2015 Tyler Fox
 //
 //  This code is distributed under the terms and conditions of the MIT license.
 //
@@ -51,7 +51,7 @@
 #if __PureLayout_MinBaseSDK_iOS_8_0 || __PureLayout_MinBaseSDK_OSX_10_10
 
 /** Sets the string as the identifier for this constraint. Available in iOS 7.0 and OS X 10.9 and later. */
-- (instancetype)autoIdentify:(NSString *)identifer;
+- (instancetype)autoIdentify:(NSString *)identifier;
 
 #endif /* __PureLayout_MinBaseSDK_iOS_8_0 || __PureLayout_MinBaseSDK_OSX_10_10 */
 
