@@ -1,9 +1,9 @@
 //
 //  PureLayoutDefines.h
-//  v2.0.1
+//  v2.0.5
 //  https://github.com/smileyborg/PureLayout
 //
-//  Copyright (c) 2014 Tyler Fox
+//  Copyright (c) 2014-2015 Tyler Fox
 //
 //  This code is distributed under the terms and conditions of the MIT license.
 //
@@ -39,47 +39,43 @@
 #define __PureLayout_MinSysVer_OSX_10_9                   !TARGET_OS_IPHONE && floor(NSFoundationVersionNumber) > NSFoundationVersionNumber10_8_4
 
 #if TARGET_OS_IPHONE
+#   import <UIKit/UIKit.h>
 
-    #import <UIKit/UIKit.h>
-
-    #define ALView                                      UIView
-    #define ALEdgeInsets                                UIEdgeInsets
-    #define ALEdgeInsetsZero                            UIEdgeInsetsZero
-    #define ALEdgeInsetsMake                            UIEdgeInsetsMake
-    #define ALLayoutConstraintAxis                      UILayoutConstraintAxis
-    #define ALLayoutConstraintOrientation               ALLayoutConstraintAxis
-    #define ALLayoutConstraintAxisHorizontal            UILayoutConstraintAxisHorizontal
-    #define ALLayoutConstraintAxisVertical              UILayoutConstraintAxisVertical
-    #define ALLayoutConstraintOrientationHorizontal     ALLayoutConstraintAxisHorizontal
-    #define ALLayoutConstraintOrientationVertical       ALLayoutConstraintAxisVertical
-    #define ALLayoutPriority                            UILayoutPriority
-    #define ALLayoutPriorityRequired                    UILayoutPriorityRequired
-    #define ALLayoutPriorityDefaultHigh                 UILayoutPriorityDefaultHigh
-    #define ALLayoutPriorityDefaultLow                  UILayoutPriorityDefaultLow
-    #define ALLayoutPriorityFittingSizeLevel            UILayoutPriorityFittingSizeLevel
-    #define ALLayoutPriorityFittingSizeCompression      ALLayoutPriorityFittingSizeLevel
-
+#   define ALView                                      UIView
+#   define ALEdgeInsets                                UIEdgeInsets
+#   define ALEdgeInsetsZero                            UIEdgeInsetsZero
+#   define ALEdgeInsetsMake                            UIEdgeInsetsMake
+#   define ALLayoutConstraintAxis                      UILayoutConstraintAxis
+#   define ALLayoutConstraintOrientation               ALLayoutConstraintAxis
+#   define ALLayoutConstraintAxisHorizontal            UILayoutConstraintAxisHorizontal
+#   define ALLayoutConstraintAxisVertical              UILayoutConstraintAxisVertical
+#   define ALLayoutConstraintOrientationHorizontal     ALLayoutConstraintAxisHorizontal
+#   define ALLayoutConstraintOrientationVertical       ALLayoutConstraintAxisVertical
+#   define ALLayoutPriority                            UILayoutPriority
+#   define ALLayoutPriorityRequired                    UILayoutPriorityRequired
+#   define ALLayoutPriorityDefaultHigh                 UILayoutPriorityDefaultHigh
+#   define ALLayoutPriorityDefaultLow                  UILayoutPriorityDefaultLow
+#   define ALLayoutPriorityFittingSizeLevel            UILayoutPriorityFittingSizeLevel
+#   define ALLayoutPriorityFittingSizeCompression      ALLayoutPriorityFittingSizeLevel
 #else
+#   import <Cocoa/Cocoa.h>
 
-    #import <Cocoa/Cocoa.h>
-
-    #define ALView                                      NSView
-    #define ALEdgeInsets                                NSEdgeInsets
-    #define ALEdgeInsetsZero                            NSEdgeInsetsMake(0, 0, 0, 0)
-    #define ALEdgeInsetsMake                            NSEdgeInsetsMake
-    #define ALLayoutConstraintOrientation               NSLayoutConstraintOrientation
-    #define ALLayoutConstraintAxis                      ALLayoutConstraintOrientation
-    #define ALLayoutConstraintOrientationHorizontal     NSLayoutConstraintOrientationHorizontal
-    #define ALLayoutConstraintOrientationVertical       NSLayoutConstraintOrientationVertical
-    #define ALLayoutConstraintAxisHorizontal            ALLayoutConstraintOrientationHorizontal
-    #define ALLayoutConstraintAxisVertical              ALLayoutConstraintOrientationVertical
-    #define ALLayoutPriority                            NSLayoutPriority
-    #define ALLayoutPriorityRequired                    NSLayoutPriorityRequired
-    #define ALLayoutPriorityDefaultHigh                 NSLayoutPriorityDefaultHigh
-    #define ALLayoutPriorityDefaultLow                  NSLayoutPriorityDefaultLow
-    #define ALLayoutPriorityFittingSizeCompression      NSLayoutPriorityFittingSizeCompression
-    #define ALLayoutPriorityFittingSizeLevel            ALLayoutPriorityFittingSizeCompression
-
+#   define ALView                                      NSView
+#   define ALEdgeInsets                                NSEdgeInsets
+#   define ALEdgeInsetsZero                            NSEdgeInsetsMake(0, 0, 0, 0)
+#   define ALEdgeInsetsMake                            NSEdgeInsetsMake
+#   define ALLayoutConstraintOrientation               NSLayoutConstraintOrientation
+#   define ALLayoutConstraintAxis                      ALLayoutConstraintOrientation
+#   define ALLayoutConstraintOrientationHorizontal     NSLayoutConstraintOrientationHorizontal
+#   define ALLayoutConstraintOrientationVertical       NSLayoutConstraintOrientationVertical
+#   define ALLayoutConstraintAxisHorizontal            ALLayoutConstraintOrientationHorizontal
+#   define ALLayoutConstraintAxisVertical              ALLayoutConstraintOrientationVertical
+#   define ALLayoutPriority                            NSLayoutPriority
+#   define ALLayoutPriorityRequired                    NSLayoutPriorityRequired
+#   define ALLayoutPriorityDefaultHigh                 NSLayoutPriorityDefaultHigh
+#   define ALLayoutPriorityDefaultLow                  NSLayoutPriorityDefaultLow
+#   define ALLayoutPriorityFittingSizeCompression      NSLayoutPriorityFittingSizeCompression
+#   define ALLayoutPriorityFittingSizeLevel            ALLayoutPriorityFittingSizeCompression
 #endif /* TARGET_OS_IPHONE */
 
 

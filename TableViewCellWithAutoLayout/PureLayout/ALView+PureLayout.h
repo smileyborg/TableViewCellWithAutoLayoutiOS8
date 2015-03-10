@@ -1,10 +1,10 @@
 //
 //  ALView+PureLayout.h
-//  v2.0.1
+//  v2.0.5
 //  https://github.com/smileyborg/PureLayout
 //
 //  Copyright (c) 2012 Richard Turton
-//  Copyright (c) 2013-2014 Tyler Fox
+//  Copyright (c) 2013-2015 Tyler Fox
 //
 //  This code is distributed under the terms and conditions of the MIT license.
 //
@@ -50,8 +50,8 @@
 #pragma mark Create Constraints Without Installing
 
 /** Prevents constraints created in the given constraints block from being automatically installed (activated).
-    The created constraints returned from each PureLayout API call must be stored, as they are not retained. */
-+ (void)autoCreateConstraintsWithoutInstalling:(ALConstraintsBlock)block;
+    The constraints created from calls to the PureLayout API in the block are returned in a single array. */
++ (NSArray *)autoCreateConstraintsWithoutInstalling:(ALConstraintsBlock)block;
 
 
 #pragma mark Set Priority For Constraints
@@ -67,7 +67,7 @@
 
 /** Sets the identifier for all constraints created using the PureLayout API within the given constraints block.
     NOTE: This method will have no effect (and will NOT set the identifier) on constraints created or added without using the PureLayout API! */
-+ (void)autoSetIdentifier:(NSString *)identifer forConstraints:(ALConstraintsBlock)block;
++ (void)autoSetIdentifier:(NSString *)identifier forConstraints:(ALConstraintsBlock)block;
 
 #endif /* __PureLayout_MinBaseSDK_iOS_8_0 */
 
