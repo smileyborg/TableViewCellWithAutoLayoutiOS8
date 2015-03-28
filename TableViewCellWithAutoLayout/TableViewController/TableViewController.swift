@@ -11,21 +11,7 @@ class TableViewController: UITableViewController
 {
     let kCellIdentifier = "CellIdentifier"
     
-    var model = Model()
-    
-    override init(style: UITableViewStyle)
-    {
-        super.init(style: style)
-        
-        model.populate()
-    }
-    
-    required init(coder aDecoder: NSCoder)
-    {
-        super.init(coder: aDecoder)
-        
-        model.populate()
-    }
+    var model = Model(populated: true)
     
     override func viewDidLoad()
     {
@@ -87,7 +73,7 @@ class TableViewController: UITableViewController
             rowsToDelete.addObject(NSIndexPath(forRow: i, inSection: 0))
         }
         
-        model = Model()
+        model = Model(populated: false)
         
         tableView.deleteRowsAtIndexPaths(rowsToDelete as [AnyObject], withRowAnimation: .Automatic)
     }
