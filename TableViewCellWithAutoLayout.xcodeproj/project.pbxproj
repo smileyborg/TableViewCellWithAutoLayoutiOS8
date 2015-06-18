@@ -254,8 +254,9 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = RJ;
-				LastUpgradeCheck = 0600;
-				ORGANIZATIONNAME = RobotJackalope;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = smileyborg;
 				TargetAttributes = {
 					99BCDCBB18008C0000B8E66B = {
 						TestTargetID = 99BCDCA018008C0000B8E66B;
@@ -373,6 +374,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -438,6 +440,7 @@
 				INFOPLIST_FILE = "TableViewCellWithAutoLayout/TableViewCellWithAutoLayout-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.smileyborg.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TableViewCellWithAutoLayout/TableViewController/TableViewCellWithAutoLayout-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -456,6 +459,7 @@
 				INFOPLIST_FILE = "TableViewCellWithAutoLayout/TableViewCellWithAutoLayout-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.smileyborg.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TableViewCellWithAutoLayout/TableViewController/TableViewCellWithAutoLayout-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
@@ -478,6 +482,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "TableViewCellWithAutoLayoutTests/TableViewCellWithAutoLayoutTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.smileyborg.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -496,6 +501,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableViewCellWithAutoLayout/TableViewCellWithAutoLayout-Prefix.pch";
 				INFOPLIST_FILE = "TableViewCellWithAutoLayoutTests/TableViewCellWithAutoLayoutTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.smileyborg.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

@@ -9,7 +9,7 @@ import Foundation
 
 class Model
 {
-    var dataArray: [(title: String, body: String)] = Array()
+    var dataArray: [(title: String, body: String)] = []
     
     init(populated: Bool)
     {

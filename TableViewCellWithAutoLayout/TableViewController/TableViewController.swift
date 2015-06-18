@@ -68,14 +68,14 @@ class TableViewController: UITableViewController
     // Deletes all rows in the table view and replaces the model with a new empty one
     func clear()
     {
-        let rowsToDelete: NSMutableArray = []
+        var rowsToDelete: [NSIndexPath] = []
         for (var i = 0; i < model.dataArray.count; i++) {
-            rowsToDelete.addObject(NSIndexPath(forRow: i, inSection: 0))
+            rowsToDelete.append(NSIndexPath(forRow: i, inSection: 0))
         }
         
         model = Model(populated: false)
         
-        tableView.deleteRowsAtIndexPaths(rowsToDelete as [AnyObject], withRowAnimation: .Automatic)
+        tableView.deleteRowsAtIndexPaths(rowsToDelete, withRowAnimation: .Automatic)
     }
     
     // Adds a single row to the table view
