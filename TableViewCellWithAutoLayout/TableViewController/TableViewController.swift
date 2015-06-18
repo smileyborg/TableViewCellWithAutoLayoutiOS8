@@ -129,8 +129,8 @@ class TableViewController: UITableViewController
             return cell
         }
         
-        assert(false, "The dequeued table view cell was of an unknown type!");
-        return UITableViewCell();
+        assert(false, "The dequeued table view cell was of an unknown type!")
+        return UITableViewCell()
     }
     
     /*
