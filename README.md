@@ -7,7 +7,7 @@ Sample project demonstrating self-sizing table view cells in iOS 8, using Auto L
 
 There are two branches in this repository:
 
-1. **master** (this branch) - A Swift implementation
+1. **master** (this branch) - A Swift 2.0 implementation
 2. **[objective-c](https://github.com/smileyborg/TableViewCellWithAutoLayoutiOS8/tree/objective-c)** - An Objective-C implementation
 
 To build & run the app, you should open the `TableViewCellWithAutoLayout.xcworkspace` in Xcode.
