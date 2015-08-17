@@ -25,6 +25,7 @@
 //
 
 #import "RJTableViewCell.h"
+#import <PureLayout/PureLayout.h>
 
 #define kLabelHorizontalInsets      15.0f
 #define kLabelVerticalInsets        10.0f
@@ -74,7 +75,7 @@
         //      See here for further discussion: https://github.com/Alex311/TableCellWithAutoLayout/commit/bde387b27e33605eeac3465475d2f2ff9775f163#commitcomment-4633188
         // self.contentView.bounds = CGRectMake(0.0f, 0.0f, 99999.0f, 99999.0f);
         
-        [UIView autoSetPriority:UILayoutPriorityRequired forConstraints:^{
+        [NSLayoutConstraint autoSetPriority:UILayoutPriorityRequired forConstraints:^{
             [self.titleLabel autoSetContentCompressionResistancePriorityForAxis:ALAxisVertical];
         }];
         [self.titleLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:kLabelVerticalInsets];
@@ -83,7 +84,7 @@
         
         [self.bodyLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel withOffset:kLabelVerticalInsets];
         
-        [UIView autoSetPriority:UILayoutPriorityRequired forConstraints:^{
+        [NSLayoutConstraint autoSetPriority:UILayoutPriorityRequired forConstraints:^{
             [self.bodyLabel autoSetContentCompressionResistancePriorityForAxis:ALAxisVertical];
         }];
         [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:kLabelHorizontalInsets];
