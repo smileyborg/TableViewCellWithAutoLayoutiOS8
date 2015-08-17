@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5A3B25361945F89500838EF4 /* NibTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3B25351945F89500838EF4 /* NibTableViewCell.swift */; };
 		5A3B25381945F8AC00838EF4 /* NibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A3B25371945F8AC00838EF4 /* NibTableViewCell.xib */; };
+		65C7B47C160366D672EF8E13 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E94577F57ED7FB9D3081729B /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		99BCDCA518008C0000B8E66B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BCDCA418008C0000B8E66B /* Foundation.framework */; };
 		99BCDCA718008C0000B8E66B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BCDCA618008C0000B8E66B /* CoreGraphics.framework */; };
 		99BCDCA918008C0000B8E66B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99BCDCA818008C0000B8E66B /* UIKit.framework */; };
@@ -23,9 +24,6 @@
 		A7F5DDAA194408D9008E238B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5DDA9194408D9008E238B /* AppDelegate.swift */; };
 		A7F5DDAC19440B7B008E238B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5DDAB19440B7B008E238B /* Model.swift */; };
 		A7F5DDAE194417DC008E238B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F5DDAD194417DC008E238B /* TableViewController.swift */; };
-		B126BA121959EF4E0018DBAE /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B126BA0A1959EF4E0018DBAE /* ALView+PureLayout.m */; };
-		B126BA131959EF4E0018DBAE /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B126BA0C1959EF4E0018DBAE /* NSArray+PureLayout.m */; };
-		B126BA141959EF4E0018DBAE /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B126BA0E1959EF4E0018DBAE /* NSLayoutConstraint+PureLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		57612988E552EA49095C8330 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		5A3B25351945F89500838EF4 /* NibTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibTableViewCell.swift; sourceTree = "<group>"; };
 		5A3B25371945F8AC00838EF4 /* NibTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibTableViewCell.xib; sourceTree = "<group>"; };
 		99BCDCA118008C0000B8E66B /* TableViewCellWithAutoLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewCellWithAutoLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,15 +58,8 @@
 		A7F5DDA9194408D9008E238B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7F5DDAB19440B7B008E238B /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		A7F5DDAD194417DC008E238B /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		B126BA091959EF4E0018DBAE /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
-		B126BA0A1959EF4E0018DBAE /* ALView+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALView+PureLayout.m"; sourceTree = "<group>"; };
-		B126BA0B1959EF4E0018DBAE /* NSArray+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PureLayout.h"; sourceTree = "<group>"; };
-		B126BA0C1959EF4E0018DBAE /* NSArray+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PureLayout.m"; sourceTree = "<group>"; };
-		B126BA0D1959EF4E0018DBAE /* NSLayoutConstraint+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+PureLayout.h"; sourceTree = "<group>"; };
-		B126BA0E1959EF4E0018DBAE /* NSLayoutConstraint+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+PureLayout.m"; sourceTree = "<group>"; };
-		B126BA0F1959EF4E0018DBAE /* PureLayout+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PureLayout+Internal.h"; sourceTree = "<group>"; };
-		B126BA101959EF4E0018DBAE /* PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayout.h; sourceTree = "<group>"; };
-		B126BA111959EF4E0018DBAE /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayoutDefines.h; sourceTree = "<group>"; };
+		E8389E598E67F5F16660D9AC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E94577F57ED7FB9D3081729B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +70,7 @@
 				99BCDCA718008C0000B8E66B /* CoreGraphics.framework in Frameworks */,
 				99BCDCA918008C0000B8E66B /* UIKit.framework in Frameworks */,
 				99BCDCA518008C0000B8E66B /* Foundation.framework in Frameworks */,
+				65C7B47C160366D672EF8E13 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +94,7 @@
 				99BCDCC318008C0000B8E66B /* TableViewCellWithAutoLayoutTests */,
 				99BCDCA318008C0000B8E66B /* Frameworks */,
 				99BCDCA218008C0000B8E66B /* Products */,
+				B388C4772DBE5FA65C4D24F3 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -120,6 +114,7 @@
 				99BCDCA618008C0000B8E66B /* CoreGraphics.framework */,
 				99BCDCA818008C0000B8E66B /* UIKit.framework */,
 				99BCDCBD18008C0000B8E66B /* XCTest.framework */,
+				E94577F57ED7FB9D3081729B /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -127,7 +122,6 @@
 		99BCDCAA18008C0000B8E66B /* TableViewCellWithAutoLayout */ = {
 			isa = PBXGroup;
 			children = (
-				B126BA081959EF4E0018DBAE /* PureLayout */,
 				A7F5DDA9194408D9008E238B /* AppDelegate.swift */,
 				99BCDCB618008C0000B8E66B /* Images.xcassets */,
 				99BCDCD318008C1700B8E66B /* TableViewController */,
@@ -176,22 +170,6 @@
 			path = TableViewController;
 			sourceTree = "<group>";
 		};
-		B126BA081959EF4E0018DBAE /* PureLayout */ = {
-			isa = PBXGroup;
-			children = (
-				B126BA091959EF4E0018DBAE /* ALView+PureLayout.h */,
-				B126BA0A1959EF4E0018DBAE /* ALView+PureLayout.m */,
-				B126BA0B1959EF4E0018DBAE /* NSArray+PureLayout.h */,
-				B126BA0C1959EF4E0018DBAE /* NSArray+PureLayout.m */,
-				B126BA0D1959EF4E0018DBAE /* NSLayoutConstraint+PureLayout.h */,
-				B126BA0E1959EF4E0018DBAE /* NSLayoutConstraint+PureLayout.m */,
-				B126BA0F1959EF4E0018DBAE /* PureLayout+Internal.h */,
-				B126BA101959EF4E0018DBAE /* PureLayout.h */,
-				B126BA111959EF4E0018DBAE /* PureLayoutDefines.h */,
-			);
-			path = PureLayout;
-			sourceTree = "<group>";
-		};
 		B13F6E9E1947D6DE00FF3B42 /* Programmatic */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +187,15 @@
 			name = "Interface Builder";
 			sourceTree = "<group>";
 		};
+		B388C4772DBE5FA65C4D24F3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				57612988E552EA49095C8330 /* Pods.debug.xcconfig */,
+				E8389E598E67F5F16660D9AC /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -216,9 +203,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 99BCDCCD18008C0000B8E66B /* Build configuration list for PBXNativeTarget "TableViewCellWithAutoLayout" */;
 			buildPhases = (
+				FE8D2EDAD3B843D5ABF88A67 /* Check Pods Manifest.lock */,
 				99BCDC9D18008C0000B8E66B /* Sources */,
 				99BCDC9E18008C0000B8E66B /* Frameworks */,
 				99BCDC9F18008C0000B8E66B /* Resources */,
+				5737466CF2C0FC46426305CF /* Embed Pods Frameworks */,
+				4306B9C3FDF52317D88B94F0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -302,6 +292,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4306B9C3FDF52317D88B94F0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5737466CF2C0FC46426305CF /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE8D2EDAD3B843D5ABF88A67 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		99BCDC9D18008C0000B8E66B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -309,9 +347,6 @@
 			files = (
 				5A3B25361945F89500838EF4 /* NibTableViewCell.swift in Sources */,
 				A7F5DDAE194417DC008E238B /* TableViewController.swift in Sources */,
-				B126BA121959EF4E0018DBAE /* ALView+PureLayout.m in Sources */,
-				B126BA131959EF4E0018DBAE /* NSArray+PureLayout.m in Sources */,
-				B126BA141959EF4E0018DBAE /* NSLayoutConstraint+PureLayout.m in Sources */,
 				A7F5DDAA194408D9008E238B /* AppDelegate.swift in Sources */,
 				A7F5DDAC19440B7B008E238B /* Model.swift in Sources */,
 				A7C103221943F73D006A9720 /* TableViewCell.swift in Sources */,
@@ -431,6 +466,7 @@
 		};
 		99BCDCCE18008C0000B8E66B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57612988E552EA49095C8330 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -450,6 +486,7 @@
 		};
 		99BCDCCF18008C0000B8E66B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E8389E598E67F5F16660D9AC /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

@@ -1,6 +1,5 @@
 //
 //  ALView+PureLayout.m
-//  v2.0.5
 //  https://github.com/smileyborg/PureLayout
 //
 //  Copyright (c) 2012 Richard Turton
@@ -62,198 +61,14 @@
     return self;
 }
 
-
-#pragma mark Create Constraints Without Installing
-
 /**
- A global variable that stores a stack of arrays of constraints created without being immediately installed.
- When executing a constraints block passed into the +[autoCreateConstraintsWithoutInstalling:] method, a new
- mutable array is pushed onto this stack, and all constraints created with PureLayout in the block are added
- to this array. When the block finishes executing, the array is popped off this stack. Automatic constraint 
- installation is prevented if this stack contains at least 1 array.
- 
- NOTE: Access to this variable is not synchronized (and should only be done on the main thread).
+ Configures an existing view to not convert the autoresizing mask into constraints and returns the view.
  */
-static NSMutableArray *_al_arraysOfCreatedConstraints = nil;
-
-/**
- Accessor for the global state that stores arrays of constraints created without being installed.
- */
-+ (NSMutableArray *)al_arraysOfCreatedConstraints
+- (instancetype)configureForAutoLayout
 {
-    if (!_al_arraysOfCreatedConstraints) {
-        _al_arraysOfCreatedConstraints = [NSMutableArray new];
-    }
-    return _al_arraysOfCreatedConstraints;
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    return self;
 }
-
-/**
- Accessor for the current mutable array of constraints created without being immediately installed.
- */
-+ (NSMutableArray *)al_currentArrayOfCreatedConstraints
-{
-    return [[self al_arraysOfCreatedConstraints] lastObject];
-}
-
-/**
- Accessor for the global state that determines whether automatic constraint installation should be prevented.
- */
-+ (BOOL)al_preventAutomaticConstraintInstallation
-{
-    return [[self al_arraysOfCreatedConstraints] count] > 0;
-}
-
-/** 
- Prevents constraints created in the given constraints block from being automatically installed (activated).
- The constraints created from calls to the PureLayout API in the block are returned in a single array.
- 
- @param block A block of method calls to the PureLayout API that create constraints.
- @return An array of the constraints that were created from calls to the PureLayout API inside the block.
- */
-+ (NSArray *)autoCreateConstraintsWithoutInstalling:(ALConstraintsBlock)block
-{
-    NSAssert(block, @"The constraints block cannot be nil.");
-    NSArray *createdConstraints = nil;
-    if (block) {
-        [[self al_arraysOfCreatedConstraints] addObject:[NSMutableArray new]];
-        block();
-        createdConstraints = [self al_currentArrayOfCreatedConstraints];
-        [[self al_arraysOfCreatedConstraints] removeLastObject];
-    }
-    return createdConstraints;
-}
-
-
-#pragma mark Set Priority For Constraints
-
-/** 
- A global variable that stores a stack of layout priorities to set on constraints.
- When executing a constraints block passed into the +[autoSetPriority:forConstraints:] method, the priority for
- that call is pushed onto this stack, and when the block finishes executing, that priority is popped off this
- stack. If this stack contains at least 1 priority, the priority at the top of the stack will be set for all 
- constraints created by this library (even if automatic constraint installation is being prevented).
- NOTE: Access to this variable is not synchronized (and should only be done on the main thread).
- */
-static NSMutableArray *_al_globalConstraintPriorities = nil;
-
-/**
- Accessor for the global stack of layout priorities.
- */
-+ (NSMutableArray *)al_globalConstraintPriorities
-{
-    if (!_al_globalConstraintPriorities) {
-        _al_globalConstraintPriorities = [NSMutableArray new];
-    }
-    return _al_globalConstraintPriorities;
-}
-
-/**
- Returns the current layout priority to use for constraints.
- When executing a constraints block passed into +[autoSetPriority:forConstraints:], this will return
- the priority for the current block. Otherwise, the default Required priority is returned.
- */
-+ (ALLayoutPriority)al_currentGlobalConstraintPriority
-{
-    NSMutableArray *globalConstraintPriorities = [self al_globalConstraintPriorities];
-    if ([globalConstraintPriorities count] == 0) {
-        return ALLayoutPriorityRequired;
-    }
-    return [[globalConstraintPriorities lastObject] floatValue];
-}
-
-/**
- Accessor for the global state that determines if we're currently in the scope of a priority constraints block.
- */
-+ (BOOL)al_isExecutingPriorityConstraintsBlock
-{
-    return [[self al_globalConstraintPriorities] count] > 0;
-}
-
-/**
- Sets the constraint priority to the given value for all constraints created using the PureLayout
- API within the given constraints block.
- 
- NOTE: This method will have no effect (and will NOT set the priority) on constraints created or added 
- without using the PureLayout API!
- 
- @param priority The layout priority to be set on all constraints created in the constraints block.
- @param block A block of method calls to the PureLayout API that create and install constraints.
- */
-+ (void)autoSetPriority:(ALLayoutPriority)priority forConstraints:(ALConstraintsBlock)block
-{
-    NSAssert(block, @"The constraints block cannot be nil.");
-    if (block) {
-        [[self al_globalConstraintPriorities] addObject:@(priority)];
-        block();
-        [[self al_globalConstraintPriorities] removeLastObject];
-    }
-}
-
-
-#pragma mark Set Identifier For Constraints
-
-#if __PureLayout_MinBaseSDK_iOS_8_0
-
-/**
- A global variable that stores a stack of identifier strings to set on constraints.
- When executing a constraints block passed into the +[autoSetIdentifier:forConstraints:] method, the identifier for
- that call is pushed onto this stack, and when the block finishes executing, that identifier is popped off this
- stack. If this stack contains at least 1 identifier, the identifier at the top of the stack will be set for all
- constraints created by this library (even if automatic constraint installation is being prevented).
- NOTE: Access to this variable is not synchronized (and should only be done on the main thread).
- */
-static NSMutableArray *_al_globalConstraintIdentifiers = nil;
-
-/**
- Accessor for the global state of constraint identifiers.
- */
-+ (NSMutableArray *)al_globalConstraintIdentifiers
-{
-    if (!_al_globalConstraintIdentifiers) {
-        _al_globalConstraintIdentifiers = [NSMutableArray new];
-    }
-    return _al_globalConstraintIdentifiers;
-}
-
-/**
- Returns the current identifier string to use for constraints.
- When executing a constraints block passed into +[autoSetIdentifier:forConstraints:], this will return
- the identifier for the current block. Otherwise, nil is returned.
- */
-+ (NSString *)al_currentGlobalConstraintIdentifier
-{
-    NSMutableArray *globalConstraintIdentifiers = [self al_globalConstraintIdentifiers];
-    if ([globalConstraintIdentifiers count] == 0) {
-        return nil;
-    }
-    return [globalConstraintIdentifiers lastObject];
-}
-
-/** 
- Sets the identifier for all constraints created using the PureLayout API within the given constraints block.
- 
- NOTE: This method will have no effect (and will NOT set the identifier) on constraints created or added
- without using the PureLayout API!
- 
- @param identifier A string used to identify all constraints created in the constraints block.
- @param block A block of method calls to the PureLayout API that create and install constraints.
- */
-+ (void)autoSetIdentifier:(NSString *)identifier forConstraints:(ALConstraintsBlock)block
-{
-    NSAssert(block, @"The constraints block cannot be nil.");
-    NSAssert(identifier, @"The identifier string cannot be nil.");
-    if (block) {
-        if (identifier) {
-            [[self al_globalConstraintIdentifiers] addObject:identifier];
-        }
-        block();
-        if (identifier) {
-            [[self al_globalConstraintIdentifiers] removeLastObject];
-        }
-    }
-}
-
-#endif /* __PureLayout_MinBaseSDK_iOS_8_0 */
 
 
 #pragma mark Center in Superview
@@ -263,9 +78,9 @@ static NSMutableArray *_al_globalConstraintIdentifiers = nil;
  
  @return An array of constraints added.
  */
-- (NSArray *)autoCenterInSuperview
+- (__NSArray_of(NSLayoutConstraint *) *)autoCenterInSuperview
 {
-    NSMutableArray *constraints = [NSMutableArray new];
+    __NSMutableArray_of(NSLayoutConstraint *) *constraints = [NSMutableArray new];
     [constraints addObject:[self autoAlignAxisToSuperviewAxis:ALAxisHorizontal]];
     [constraints addObject:[self autoAlignAxisToSuperviewAxis:ALAxisVertical]];
     return constraints;
@@ -292,9 +107,9 @@ static NSMutableArray *_al_globalConstraintIdentifiers = nil;
  
  @return An array of constraints added.
  */
-- (NSArray *)autoCenterInSuperviewMargins
+- (__NSArray_of(NSLayoutConstraint *) *)autoCenterInSuperviewMargins
 {
-    NSMutableArray *constraints = [NSMutableArray new];
+    __NSMutableArray_of(NSLayoutConstraint *) *constraints = [NSMutableArray new];
     [constraints addObject:[self autoAlignAxisToSuperviewMarginAxis:ALAxisHorizontal]];
     [constraints addObject:[self autoAlignAxisToSuperviewMarginAxis:ALAxisVertical]];
     return constraints;
@@ -369,15 +184,25 @@ static NSMutableArray *_al_globalConstraintIdentifiers = nil;
 }
 
 /**
+ Pins the edges of the view to the edges of its superview.
+ 
+ @return An array of constraints added.
+ */
+- (__NSArray_of(NSLayoutConstraint *) *)autoPinEdgesToSuperviewEdges
+{
+    return [self autoPinEdgesToSuperviewEdgesWithInsets:ALEdgeInsetsZero];
+}
+
+/**
  Pins the edges of the view to the edges of its superview with the given edge insets.
  The insets.left corresponds to a leading edge constraint, and insets.right corresponds to a trailing edge constraint.
  
  @param insets The insets for this view's edges from its superview's edges.
  @return An array of constraints added.
  */
-- (NSArray *)autoPinEdgesToSuperviewEdgesWithInsets:(ALEdgeInsets)insets
+- (__NSArray_of(NSLayoutConstraint *) *)autoPinEdgesToSuperviewEdgesWithInsets:(ALEdgeInsets)insets
 {
-    NSMutableArray *constraints = [NSMutableArray new];
+    __NSMutableArray_of(NSLayoutConstraint *) *constraints = [NSMutableArray new];
     [constraints addObject:[self autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:insets.top]];
     [constraints addObject:[self autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:insets.left]];
     [constraints addObject:[self autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:insets.bottom]];
@@ -394,9 +219,9 @@ static NSMutableArray *_al_globalConstraintIdentifiers = nil;
  @param edge The edge of this view to exclude in pinning to its superview; this method will not apply any constraint to it.
  @return An array of constraints added.
  */
-- (NSArray *)autoPinEdgesToSuperviewEdgesWithInsets:(ALEdgeInsets)insets excludingEdge:(ALEdge)edge
+- (__NSArray_of(NSLayoutConstraint *) *)autoPinEdgesToSuperviewEdgesWithInsets:(ALEdgeInsets)insets excludingEdge:(ALEdge)edge
 {
-    NSMutableArray *constraints = [NSMutableArray new];
+    __NSMutableArray_of(NSLayoutConstraint *) *constraints = [NSMutableArray new];
     if (edge != ALEdgeTop) {
         [constraints addObject:[self autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:insets.top]];
     }
@@ -454,9 +279,9 @@ static NSMutableArray *_al_globalConstraintIdentifiers = nil;
  
  @return An array of constraints added.
  */
-- (NSArray *)autoPinEdgesToSuperviewMargins
+- (__NSArray_of(NSLayoutConstraint *) *)autoPinEdgesToSuperviewMargins
 {
-    NSMutableArray *constraints = [NSMutableArray new];
+    __NSMutableArray_of(NSLayoutConstraint *) *constraints = [NSMutableArray new];
     [constraints addObject:[self autoPinEdgeToSuperviewMargin:ALEdgeTop]];
     [constraints addObject:[self autoPinEdgeToSuperviewMargin:ALEdgeLeading]];
     [constraints addObject:[self autoPinEdgeToSuperviewMargin:ALEdgeBottom]];
@@ -470,9 +295,9 @@ static NSMutableArray *_al_globalConstraintIdentifiers = nil;
  @param edge The edge of this view to exclude in pinning to its superview; this method will not apply any constraint to it.
  @return An array of constraints added.
  */
-- (NSArray *)autoPinEdgesToSuperviewMarginsExcludingEdge:(ALEdge)edge
+- (__NSArray_of(NSLayoutConstraint *) *)autoPinEdgesToSuperviewMarginsExcludingEdge:(ALEdge)edge
 {
-    NSMutableArray *constraints = [NSMutableArray new];
+    __NSMutableArray_of(NSLayoutConstraint *) *constraints = [NSMutableArray new];
     if (edge != ALEdgeTop) {
         [constraints addObject:[self autoPinEdgeToSuperviewMargin:ALEdgeTop]];
     }
@@ -563,6 +388,19 @@ static NSMutableArray *_al_globalConstraintIdentifiers = nil;
     return [self autoConstrainAttribute:(ALAttribute)axis toAttribute:(ALAttribute)axis ofView:otherView withOffset:offset];
 }
 
+/**
+ Aligns an axis of the view to the same axis of another view with a multiplier.
+ 
+ @param axis The axis of this view and the other view to align.
+ @param otherView The other view to align to. Must be in the same view hierarchy as this view.
+ @param multiplier The multiplier between the axis of this view and the axis of the other view.
+ @return The constraint added.
+ */
+- (NSLayoutConstraint *)autoAlignAxis:(ALAxis)axis toSameAxisOfView:(ALView *)otherView withMultiplier:(CGFloat)multiplier
+{
+    return [self autoConstrainAttribute:(ALAttribute)axis toAttribute:(ALAttribute)axis ofView:otherView withMultiplier:multiplier];
+}
+
 
 #pragma mark Match Dimensions
 
@@ -646,9 +484,9 @@ static NSMutableArray *_al_globalConstraintIdentifiers = nil;
  @param size The size to set this view's dimensions to.
  @return An array of constraints added.
  */
-- (NSArray *)autoSetDimensionsToSize:(CGSize)size
+- (__NSArray_of(NSLayoutConstraint *) *)autoSetDimensionsToSize:(CGSize)size
 {
-    NSMutableArray *constraints = [NSMutableArray new];
+    __NSMutableArray_of(NSLayoutConstraint *) *constraints = [NSMutableArray new];
     [constraints addObject:[self autoSetDimension:ALDimensionWidth toSize:size.width]];
     [constraints addObject:[self autoSetDimension:ALDimensionHeight toSize:size.height]];
     return constraints;
@@ -694,14 +532,14 @@ static NSMutableArray *_al_globalConstraintIdentifiers = nil;
  */
 - (void)autoSetContentCompressionResistancePriorityForAxis:(ALAxis)axis
 {
-    NSAssert([ALView al_isExecutingPriorityConstraintsBlock], @"%@ should only be called from within the block passed into the method +[autoSetPriority:forConstraints:]", NSStringFromSelector(_cmd));
-    if ([ALView al_isExecutingPriorityConstraintsBlock]) {
+    NSAssert([NSLayoutConstraint al_isExecutingPriorityConstraintsBlock], @"%@ should only be called from within the block passed into the method +[autoSetPriority:forConstraints:]", NSStringFromSelector(_cmd));
+    if ([NSLayoutConstraint al_isExecutingPriorityConstraintsBlock]) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
         ALLayoutConstraintAxis constraintAxis = [NSLayoutConstraint al_constraintAxisForAxis:axis];
 #if TARGET_OS_IPHONE
-        [self setContentCompressionResistancePriority:[ALView al_currentGlobalConstraintPriority] forAxis:constraintAxis];
+        [self setContentCompressionResistancePriority:[NSLayoutConstraint al_currentGlobalConstraintPriority] forAxis:constraintAxis];
 #else
-        [self setContentCompressionResistancePriority:[ALView al_currentGlobalConstraintPriority] forOrientation:constraintAxis];
+        [self setContentCompressionResistancePriority:[NSLayoutConstraint al_currentGlobalConstraintPriority] forOrientation:constraintAxis];
 #endif /* TARGET_OS_IPHONE */
     }
 }
@@ -714,14 +552,14 @@ static NSMutableArray *_al_globalConstraintIdentifiers = nil;
  */
 - (void)autoSetContentHuggingPriorityForAxis:(ALAxis)axis
 {
-    NSAssert([ALView al_isExecutingPriorityConstraintsBlock], @"%@ should only be called from within the block passed into the method +[autoSetPriority:forConstraints:]", NSStringFromSelector(_cmd));
-    if ([ALView al_isExecutingPriorityConstraintsBlock]) {
+    NSAssert([NSLayoutConstraint al_isExecutingPriorityConstraintsBlock], @"%@ should only be called from within the block passed into the method +[autoSetPriority:forConstraints:]", NSStringFromSelector(_cmd));
+    if ([NSLayoutConstraint al_isExecutingPriorityConstraintsBlock]) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
         ALLayoutConstraintAxis constraintAxis = [NSLayoutConstraint al_constraintAxisForAxis:axis];
 #if TARGET_OS_IPHONE
-        [self setContentHuggingPriority:[ALView al_currentGlobalConstraintPriority] forAxis:constraintAxis];
+        [self setContentHuggingPriority:[NSLayoutConstraint al_currentGlobalConstraintPriority] forAxis:constraintAxis];
 #else
-        [self setContentHuggingPriority:[ALView al_currentGlobalConstraintPriority] forOrientation:constraintAxis];
+        [self setContentHuggingPriority:[NSLayoutConstraint al_currentGlobalConstraintPriority] forOrientation:constraintAxis];
 #endif /* TARGET_OS_IPHONE */
     }
 }
@@ -884,99 +722,7 @@ static NSMutableArray *_al_globalConstraintIdentifiers = nil;
 #endif /* TARGET_OS_IPHONE */
 
 
-#pragma mark Deprecated Methods
-
-/**
- DEPRECATED as of PureLayout v2.0.0. Retain a reference to and remove specific constraints instead, or recreate the view(s) entirely to remove all constraints.
- Removes all explicit constraints that affect the view.
- WARNING: Apple's constraint solver is not optimized for large-scale constraint removal; you may encounter major performance issues after using this method.
- It is not recommended to use this method to "reset" a view for reuse in a different way with new constraints. Create a new view instead.
- NOTE: This method preserves implicit constraints, such as intrinsic content size constraints, which you usually do not want to remove.
- */
-- (void)autoRemoveConstraintsAffectingView
-{
-    [self autoRemoveConstraintsAffectingViewIncludingImplicitConstraints:NO];
-}
-
-/**
- DEPRECATED as of PureLayout v2.0.0. Retain a reference to and remove specific constraints instead, or recreate the view(s) entirely to remove all constraints.
- Removes all constraints that affect the view, optionally including implicit constraints.
- WARNING: Apple's constraint solver is not optimized for large-scale constraint removal; you may encounter major performance issues after using this method.
- It is not recommended to use this method to "reset" a view for reuse in a different way with new constraints. Create a new view instead.
- NOTE: Implicit constraints are auto-generated lower priority constraints (such as those that attempt to keep a view at
- its intrinsic content size by hugging its content & resisting compression), and you usually do not want to remove these.
- 
- @param shouldRemoveImplicitConstraints Whether implicit constraints should be removed or skipped.
- */
-- (void)autoRemoveConstraintsAffectingViewIncludingImplicitConstraints:(BOOL)shouldRemoveImplicitConstraints
-{
-    NSMutableArray *constraintsToRemove = [NSMutableArray new];
-    ALView *startView = self;
-    do {
-        for (NSLayoutConstraint *constraint in startView.constraints) {
-            BOOL isImplicitConstraint = [NSStringFromClass([constraint class]) isEqualToString:@"NSContentSizeLayoutConstraint"];
-            if (shouldRemoveImplicitConstraints || !isImplicitConstraint) {
-                if (constraint.firstItem == self || constraint.secondItem == self) {
-                    [constraintsToRemove addObject:constraint];
-                }
-            }
-        }
-        startView = startView.superview;
-    } while (startView);
-    [constraintsToRemove autoRemoveConstraints];
-}
-
-/**
- DEPRECATED as of PureLayout v2.0.0. Retain a reference to and remove specific constraints instead, or recreate the view(s) entirely to remove all constraints.
- Recursively removes all explicit constraints that affect the view and its subviews.
- WARNING: Apple's constraint solver is not optimized for large-scale constraint removal; you may encounter major performance issues after using this method.
- It is not recommended to use this method to "reset" views for reuse in a different way with new constraints. Create a new view instead.
- NOTE: This method preserves implicit constraints, such as intrinsic content size constraints, which you usually do not want to remove.
- */
-- (void)autoRemoveConstraintsAffectingViewAndSubviews
-{
-    [self autoRemoveConstraintsAffectingViewAndSubviewsIncludingImplicitConstraints:NO];
-}
-
-/**
- DEPRECATED as of PureLayout v2.0.0. Retain a reference to and remove specific constraints instead, or recreate the view(s) entirely to remove all constraints.
- Recursively removes all constraints that affect the view and its subviews, optionally including implicit constraints.
- WARNING: Apple's constraint solver is not optimized for large-scale constraint removal; you may encounter major performance issues after using this method.
- It is not recommended to use this method to "reset" views for reuse in a different way with new constraints. Create a new view instead.
- NOTE: Implicit constraints are auto-generated lower priority constraints (such as those that attempt to keep a view at
- its intrinsic content size by hugging its content & resisting compression), and you usually do not want to remove these.
- 
- @param shouldRemoveImplicitConstraints Whether implicit constraints should be removed or skipped.
- */
-- (void)autoRemoveConstraintsAffectingViewAndSubviewsIncludingImplicitConstraints:(BOOL)shouldRemoveImplicitConstraints
-{
-    [self autoRemoveConstraintsAffectingViewIncludingImplicitConstraints:shouldRemoveImplicitConstraints];
-    for (ALView *subview in self.subviews) {
-        [subview autoRemoveConstraintsAffectingViewAndSubviewsIncludingImplicitConstraints:shouldRemoveImplicitConstraints];
-    }
-}
-
-
 #pragma mark Internal Methods
-
-/**
- Applies the global constraint priority and identifier to the given constraint.
- This should be done before installing all constraints.
- 
- @param constraint The constraint to set the global priority and identifier on.
- */
-+ (void)al_applyGlobalStateToConstraint:(NSLayoutConstraint *)constraint
-{
-    if ([ALView al_isExecutingPriorityConstraintsBlock]) {
-        constraint.priority = [ALView al_currentGlobalConstraintPriority];
-    }
-#if __PureLayout_MinBaseSDK_iOS_8_0
-    NSString *globalConstraintIdentifier = [ALView al_currentGlobalConstraintIdentifier];
-    if (globalConstraintIdentifier) {
-        [constraint autoIdentify:globalConstraintIdentifier];
-    }
-#endif /* __PureLayout_MinBaseSDK_iOS_8_0 */
-}
 
 /**
  Adds the given constraint to this view after applying the global state to the constraint.
@@ -989,9 +735,9 @@ static NSMutableArray *_al_globalConstraintIdentifiers = nil;
  */
 - (void)al_addConstraint:(NSLayoutConstraint *)constraint
 {
-    [ALView al_applyGlobalStateToConstraint:constraint];
-    if ([ALView al_preventAutomaticConstraintInstallation]) {
-        [[ALView al_currentArrayOfCreatedConstraints] addObject:constraint];
+    [NSLayoutConstraint al_applyGlobalStateToConstraint:constraint];
+    if ([NSLayoutConstraint al_preventAutomaticConstraintInstallation]) {
+        [[NSLayoutConstraint al_currentArrayOfCreatedConstraints] addObject:constraint];
     } else {
         [self addConstraint:constraint];
     }

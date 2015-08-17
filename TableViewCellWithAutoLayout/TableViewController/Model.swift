@@ -5,7 +5,7 @@
 //  Copyright (c) 2014 Tyler Fox
 //
 
-import Foundation
+import UIKit
 
 class Model
 {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PureLayout
 
 class TableViewCell: UITableViewCell
 {
@@ -64,7 +65,7 @@ class TableViewCell: UITableViewCell
             // contentView.bounds = CGRect(x: 0.0, y: 0.0, width: 99999.0, height: 99999.0)
             
             // Prevent the two UILabels from being compressed below their intrinsic content height
-            UIView.autoSetPriority(UILayoutPriorityRequired) {
+            NSLayoutConstraint.autoSetPriority(UILayoutPriorityRequired) {
                 self.titleLabel.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
                 self.bodyLabel.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
             }
