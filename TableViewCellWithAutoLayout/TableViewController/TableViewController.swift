@@ -43,6 +43,14 @@ class TableViewController: UITableViewController
         // Setting the estimated row height prevents the table view from calling tableView:heightForRowAtIndexPath: for every row in the table on first load;
         // it will only be called as cells are about to scroll onscreen. This is a major performance optimization.
         tableView.estimatedRowHeight = 44.0 // set this to whatever your "average" cell height is; it doesn't need to be very accurate
+        
+        
+        
+        
+        //NOTE:
+        //when I learn the new autoLayout feature in ios8,I found that if devper add the contrains with Code ( but not complete，app may still work well when devper manual caculate the cell height )，the new feature will not work！
+        // SO,devper must add constains completely!
+        //
     }
     
     override func viewDidAppear(animated: Bool)
