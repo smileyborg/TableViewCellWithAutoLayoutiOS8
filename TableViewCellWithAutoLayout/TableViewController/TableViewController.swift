@@ -18,8 +18,8 @@ class TableViewController: UITableViewController
         super.viewDidLoad()
         
         title = "iOS 8 Self Sizing Cells"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Trash, target: self, action: "clear")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addRow")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Trash, target: self, action: #selector(TableViewController.clear))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(TableViewController.addRow))
         
         tableView.allowsSelection = false
         
@@ -49,7 +49,7 @@ class TableViewController: UITableViewController
     {
         super.viewDidAppear(animated)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "contentSizeCategoryChanged:", name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TableViewController.contentSizeCategoryChanged(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
     }
     
     override func viewDidDisappear(animated: Bool)
@@ -69,7 +69,7 @@ class TableViewController: UITableViewController
     func clear()
     {
         var rowsToDelete: [NSIndexPath] = []
-        for (var i = 0; i < model.dataArray.count; i++) {
+        for i in 0..<model.dataArray.count {
             rowsToDelete.append(NSIndexPath(forRow: i, inSection: 0))
         }
         
