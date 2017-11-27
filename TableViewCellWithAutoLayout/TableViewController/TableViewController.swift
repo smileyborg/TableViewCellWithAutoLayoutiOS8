@@ -18,8 +18,8 @@ class TableViewController: UITableViewController
         super.viewDidLoad()
         
         title = "iOS 8 Self Sizing Cells"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Trash, target: self, action: #selector(TableViewController.clear))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(TableViewController.addRow))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.trash, target: self, action: #selector(TableViewController.clear))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(TableViewController.addRow))
         
         tableView.allowsSelection = false
         
@@ -31,7 +31,7 @@ class TableViewController: UITableViewController
         Uncomment ONE of the two lines below to switch between approaches.
         Make sure that the other line commented out - don't uncomment both!
         *******************************************************************/
-        tableView.registerClass(TableViewCell.self, forCellReuseIdentifier: kCellIdentifier) // uncomment this line to load table view cells programmatically
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: kCellIdentifier) // uncomment this line to load table view cells programmatically
 //        tableView.registerNib(UINib(nibName: "NibTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: kCellIdentifier) // uncomment this line to load table view cells from IB
         
         
@@ -45,22 +45,22 @@ class TableViewController: UITableViewController
         tableView.estimatedRowHeight = 44.0 // set this to whatever your "average" cell height is; it doesn't need to be very accurate
     }
     
-    override func viewDidAppear(animated: Bool)
+    override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TableViewController.contentSizeCategoryChanged(_:)), name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TableViewController.contentSizeCategoryChanged(_:)), name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
     }
     
-    override func viewDidDisappear(animated: Bool)
+    override func viewDidDisappear(_ animated: Bool)
     {
         super.viewDidDisappear(animated)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIContentSizeCategoryDidChangeNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIContentSizeCategoryDidChange, object: nil)
     }
     
     // This function will be called when the Dynamic Type user setting changes (from the system Settings app)
-    func contentSizeCategoryChanged(notification: NSNotification)
+    func contentSizeCategoryChanged(_ notification: Notification)
     {
         tableView.reloadData()
     }
@@ -68,14 +68,14 @@ class TableViewController: UITableViewController
     // Deletes all rows in the table view and replaces the model with a new empty one
     func clear()
     {
-        var rowsToDelete: [NSIndexPath] = []
+        var rowsToDelete: [IndexPath] = []
         for i in 0..<model.dataArray.count {
-            rowsToDelete.append(NSIndexPath(forRow: i, inSection: 0))
+            rowsToDelete.append(IndexPath(row: i, section: 0))
         }
         
         model = Model(populated: false)
         
-        tableView.deleteRowsAtIndexPaths(rowsToDelete, withRowAnimation: .Automatic)
+        tableView.deleteRows(at: rowsToDelete, with: .automatic)
     }
     
     // Adds a single row to the table view
@@ -83,24 +83,24 @@ class TableViewController: UITableViewController
     {
         model.addSingleItem()
         
-        let lastIndexPath = NSIndexPath(forRow: model.dataArray.count - 1, inSection: 0)
-        tableView.insertRowsAtIndexPaths([lastIndexPath], withRowAnimation: .Automatic)
+        let lastIndexPath = IndexPath(row: model.dataArray.count - 1, section: 0)
+        tableView.insertRows(at: [lastIndexPath], with: .automatic)
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    override func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return model.dataArray.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         // This will be the case for programmatically loaded cells (see viewDidLoad to switch approaches)
-        if let cell: TableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as? TableViewCell {
+        if let cell: TableViewCell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as? TableViewCell {
             // Configure the cell for this indexPath
             cell.updateFonts()
             let modelItem = model.dataArray[indexPath.row]
@@ -115,7 +115,7 @@ class TableViewController: UITableViewController
         }
         
         // This will be the case for interface builder loaded cells (see viewDidLoad to switch approaches)
-        if let cell: NibTableViewCell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as? NibTableViewCell {
+        if let cell: NibTableViewCell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier) as? NibTableViewCell {
             // Configure the cell for this indexPath
             cell.updateFonts()
             let modelItem = model.dataArray[indexPath.row]
