@@ -17,8 +17,8 @@ class TableViewCell: UITableViewCell
     
     var didSetupConstraints = false
     
-    var titleLabel: UILabel = UILabel.newAutoLayoutView()
-    var bodyLabel: UILabel = UILabel.newAutoLayoutView()
+    var titleLabel: UILabel = UILabel.newAutoLayout()
+    var bodyLabel: UILabel = UILabel.newAutoLayout()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String!)
     {
@@ -36,16 +36,16 @@ class TableViewCell: UITableViewCell
     
     func setupViews()
     {
-        titleLabel.lineBreakMode = .ByTruncatingTail
+        titleLabel.lineBreakMode = .byTruncatingTail
         titleLabel.numberOfLines = 1
-        titleLabel.textAlignment = .Left
-        titleLabel.textColor = UIColor.blackColor()
+        titleLabel.textAlignment = .left
+        titleLabel.textColor = UIColor.black
         titleLabel.backgroundColor = UIColor(red: 0, green: 0, blue: 1, alpha: 0.1) // light blue
         
-        bodyLabel.lineBreakMode = .ByTruncatingTail
+        bodyLabel.lineBreakMode = .byTruncatingTail
         bodyLabel.numberOfLines = 0
-        bodyLabel.textAlignment = .Left
-        bodyLabel.textColor = UIColor.darkGrayColor()
+        bodyLabel.textAlignment = .left
+        bodyLabel.textColor = UIColor.darkGray
         bodyLabel.backgroundColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.1) // light red
         
         updateFonts()
@@ -66,20 +66,20 @@ class TableViewCell: UITableViewCell
             
             // Prevent the two UILabels from being compressed below their intrinsic content height
             NSLayoutConstraint.autoSetPriority(UILayoutPriorityRequired) {
-                self.titleLabel.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
-                self.bodyLabel.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
+                self.titleLabel.autoSetContentCompressionResistancePriority(for: .vertical)
+                self.bodyLabel.autoSetContentCompressionResistancePriority(for: .vertical)
             }
             
-            titleLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: kLabelVerticalInsets)
-            titleLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: kLabelHorizontalInsets)
-            titleLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: kLabelHorizontalInsets)
+            titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: kLabelVerticalInsets)
+            titleLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: kLabelHorizontalInsets)
+            titleLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: kLabelHorizontalInsets)
             
             // This constraint is an inequality so that if the cell is slightly taller than actually required, extra space will go here
-            bodyLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: titleLabel, withOffset: 10.0, relation: .GreaterThanOrEqual)
+            bodyLabel.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 10.0, relation: .greaterThanOrEqual)
             
-            bodyLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: kLabelHorizontalInsets)
-            bodyLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: kLabelHorizontalInsets)
-            bodyLabel.autoPinEdgeToSuperviewEdge(.Bottom, withInset: kLabelVerticalInsets)
+            bodyLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: kLabelHorizontalInsets)
+            bodyLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: kLabelHorizontalInsets)
+            bodyLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: kLabelVerticalInsets)
             
             didSetupConstraints = true
         }
@@ -89,7 +89,7 @@ class TableViewCell: UITableViewCell
     
     func updateFonts()
     {
-        titleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-        bodyLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleCaption2)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
+        bodyLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption2)
     }
 }

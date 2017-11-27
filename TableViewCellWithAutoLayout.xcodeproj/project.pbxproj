@@ -248,6 +248,9 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = smileyborg;
 				TargetAttributes = {
+					99BCDCA018008C0000B8E66B = {
+						LastSwiftMigration = 0830;
+					};
 					99BCDCBB18008C0000B8E66B = {
 						TestTargetID = 99BCDCA018008C0000B8E66B;
 					};
@@ -480,6 +483,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TableViewCellWithAutoLayout/TableViewController/TableViewCellWithAutoLayout-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -499,6 +503,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.smileyborg.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TableViewCellWithAutoLayout/TableViewController/TableViewCellWithAutoLayout-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
