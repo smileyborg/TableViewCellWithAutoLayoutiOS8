@@ -1,6 +1,8 @@
 TableViewCellWithAutoLayoutiOS8
 ===========================
 
+![alt text](https://raw.githubusercontent.com/jonchui/TableViewCellWithAutoLayoutiOS8/master/Screenshot%202018-01-19%2009.13.11.png)
+
 *Note: This sample project requires __Xcode 7__ and __iOS 8__. For a sample project demonstrating the iOS 7 compatible implementation, [click here](https://github.com/smileyborg/TableViewCellWithAutoLayout).*
 
 Sample project demonstrating self-sizing table view cells in iOS 8, using Auto Layout in UITableViewCell to achieve dynamic layouts with variable row heights. This project is a universal app that will run on iPhone and iPad. This implementation is only compatible with iOS 8 and later.
