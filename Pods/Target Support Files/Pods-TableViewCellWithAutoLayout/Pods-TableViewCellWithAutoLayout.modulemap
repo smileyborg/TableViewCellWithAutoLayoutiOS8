@@ -1,0 +1,6 @@
+framework module Pods_TableViewCellWithAutoLayout {
+  umbrella header "Pods-TableViewCellWithAutoLayout-umbrella.h"
+
+  export *
+  module * { export * }
+}
