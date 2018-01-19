@@ -21,7 +21,7 @@ class NibTableViewCell: UITableViewCell
     
     func updateFonts()
     {
-        titleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-        bodyLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleCaption2)
+        titleLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
+        bodyLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption2)
     }
 }
