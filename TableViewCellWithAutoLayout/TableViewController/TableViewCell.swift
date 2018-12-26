@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import PureLayout
+//import PureLayout
 
 class TableViewCell: UITableViewCell
 {
