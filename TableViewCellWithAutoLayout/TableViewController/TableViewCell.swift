@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import PureLayout
+//import PureLayout
 
 class TableViewCell: UITableViewCell
 {
@@ -70,6 +70,7 @@ class TableViewCell: UITableViewCell
                 self.bodyLabel.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
             }
             
+            titleLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: kLabelVerticalInsets)
             titleLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: kLabelVerticalInsets)
             titleLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: kLabelHorizontalInsets)
             titleLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: kLabelHorizontalInsets)
